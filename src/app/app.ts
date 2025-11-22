@@ -11,7 +11,7 @@ import { initFlowbite } from 'flowbite';
 export class App implements OnInit {
   protected readonly title = signal('Darreb-Academy');
   ngOnInit(): void {
-    initFlowbite();
+    initFlowbite();  
   }
 
 }
