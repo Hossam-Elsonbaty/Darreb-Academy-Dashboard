@@ -8,7 +8,6 @@
       "description_ar": "تعلم تطوير الواجهة الأمامية والخلفية."
     }
   ],
-
   "users": [
     {
       "id": "usr001",
@@ -27,7 +26,6 @@
       "enrolledCourses": []
     }
   ],
-
   "lectures": [
     {
       "id": "lec001",
@@ -38,7 +36,6 @@
       "order": 1
     }
   ],
-
   "chapters": [
     {
       "id": "chap001",
@@ -61,7 +58,6 @@
       "order": 1
     }
   ],
-
   "courses": [
     {
       "id": "course001",
@@ -71,14 +67,12 @@
       "description_ar": "تعلم HTML و CSS و JavaScript وقم ببناء مشاريع.",
       "price": 49.99,
       "thumbnail": "https://picsum.photos/200",
-
       "instructor": {
         "id": "usr002",
         "email": "instructor@mail.com",
         "fullName": "Mona Ibrahim",
         "role": "instructor"
       },
-
       "chapters": [
         {
           "chapter": {
@@ -103,13 +97,11 @@
           "order": 1
         }
       ],
-
       "category": {
         "id": "cat001",
         "name": "Web Development",
         "name_ar": "تطوير الويب"
       },
-
       "level": "beginner",
       "duration": 300,
       "isPublished": true,
@@ -118,7 +110,6 @@
       "totalEnrollments": 850
     }
   ],
-
   "tracks": [
     {
       "id": "trk001",
@@ -138,7 +129,6 @@
       "isPublished": true
     }
   ],
-
   "orders": [
     {
       "id": "ord001",
@@ -163,7 +153,6 @@
       "total": 49.99
     }
   ],
-
   "reviews": [
     {
       "id": "rev001",
