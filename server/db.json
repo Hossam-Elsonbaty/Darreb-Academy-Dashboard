@@ -1,0 +1,183 @@
+{
+  "categories": [
+    {
+      "id": "cat001",
+      "name": "Web Development",
+      "name_ar": "تطوير الويب",
+      "description": "Learn frontend & backend development.",
+      "description_ar": "تعلم تطوير الواجهة الأمامية والخلفية."
+    }
+  ],
+
+  "users": [
+    {
+      "id": "usr001",
+      "email": "student@mail.com",
+      "passwordHash": "hashedpassword123",
+      "fullName": "Ahmed Ali",
+      "role": "student",
+      "enrolledCourses": ["course001"]
+    },
+    {
+      "id": "usr002",
+      "email": "instructor@mail.com",
+      "passwordHash": "hashedpassword456",
+      "fullName": "Mona Ibrahim",
+      "role": "instructor",
+      "enrolledCourses": []
+    }
+  ],
+
+  "lectures": [
+    {
+      "id": "lec001",
+      "title": "Introduction to HTML",
+      "title_ar": "مقدمة في HTML",
+      "videoUrl": "https://videos/html-intro.mp4",
+      "duration": 300,
+      "order": 1
+    }
+  ],
+
+  "chapters": [
+    {
+      "id": "chap001",
+      "title": "Basics of Web",
+      "title_ar": "أساسيات الويب",
+      "lectures": [
+        {
+          "lecture": {
+            "id": "lec001",
+            "title": "Introduction to HTML",
+            "title_ar": "مقدمة في HTML",
+            "videoUrl": "https://videos/html-intro.mp4",
+            "duration": 300,
+            "order": 1
+          },
+          "order": 1
+        }
+      ],
+      "duration": 300,
+      "order": 1
+    }
+  ],
+
+  "courses": [
+    {
+      "id": "course001",
+      "title": "Full Web Development",
+      "title_ar": "تطوير الويب الكامل",
+      "description": "Learn HTML, CSS, JS and build projects.",
+      "description_ar": "تعلم HTML و CSS و JavaScript وقم ببناء مشاريع.",
+      "price": 49.99,
+      "thumbnail": "https://picsum.photos/200",
+
+      "instructor": {
+        "id": "usr002",
+        "email": "instructor@mail.com",
+        "fullName": "Mona Ibrahim",
+        "role": "instructor"
+      },
+
+      "chapters": [
+        {
+          "chapter": {
+            "id": "chap001",
+            "title": "Basics of Web",
+            "title_ar": "أساسيات الويب",
+            "duration": 300,
+            "lectures": [
+              {
+                "lecture": {
+                  "id": "lec001",
+                  "title": "Introduction to HTML",
+                  "title_ar": "مقدمة في HTML",
+                  "videoUrl": "https://videos/html-intro.mp4",
+                  "duration": 300,
+                  "order": 1
+                },
+                "order": 1
+              }
+            ]
+          },
+          "order": 1
+        }
+      ],
+
+      "category": {
+        "id": "cat001",
+        "name": "Web Development",
+        "name_ar": "تطوير الويب"
+      },
+
+      "level": "beginner",
+      "duration": 300,
+      "isPublished": true,
+      "rating": 4.5,
+      "totalRatings": 120,
+      "totalEnrollments": 850
+    }
+  ],
+
+  "tracks": [
+    {
+      "id": "trk001",
+      "name": "Frontend Mastery",
+      "name_ar": "احتراف الواجهة الأمامية",
+      "courses": [
+        {
+          "course": {
+            "id": "course001",
+            "title": "Full Web Development",
+            "price": 49.99,
+            "thumbnail": "https://picsum.photos/200"
+          },
+          "order": 1
+        }
+      ],
+      "isPublished": true
+    }
+  ],
+
+  "orders": [
+    {
+      "id": "ord001",
+      "orderId": "ORD-1001",
+      "user": {
+        "id": "usr001",
+        "fullName": "Ahmed Ali",
+        "email": "student@mail.com"
+      },
+      "items": [
+        {
+          "course": {
+            "id": "course001",
+            "title": "Full Web Development",
+            "price": 49.99
+          },
+          "price": 49.99
+        }
+      ],
+      "paymentMethod": "Stripe",
+      "paymentStatus": "completed",
+      "total": 49.99
+    }
+  ],
+
+  "reviews": [
+    {
+      "id": "rev001",
+      "course": {
+        "id": "course001",
+        "title": "Full Web Development"
+      },
+      "user": {
+        "id": "usr001",
+        "fullName": "Ahmed Ali"
+      },
+      "rating": 5,
+      "comment": "Great course!"
+    }
+  ]
+}
+
