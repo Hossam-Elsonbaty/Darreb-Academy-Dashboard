@@ -1,0 +1,11 @@
+.not-found-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #06111d;
+}
+.not-found-page p {
+  color: #eee;
+  font-size: 18px;
+}
