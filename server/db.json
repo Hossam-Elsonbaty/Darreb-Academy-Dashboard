@@ -12,7 +12,7 @@
     {
       "id": "usr001",
       "email": "student@mail.com",
-      "passwordHash": "hashedpassword123",
+      "password": "hashedpassword123",
       "fullName": "Ahmed Ali",
       "role": "student",
       "enrolledCourses": ["course001"]
@@ -20,7 +20,7 @@
     {
       "id": "usr002",
       "email": "instructor@mail.com",
-      "passwordHash": "hashedpassword456",
+      "password": "hashedpassword456",
       "fullName": "Mona Ibrahim",
       "role": "instructor",
       "enrolledCourses": []

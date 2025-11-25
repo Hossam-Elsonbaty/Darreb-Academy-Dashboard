@@ -28,7 +28,6 @@
           class="w-10 h-10 rounded-full"
           src='Logo.png' alt="user photo"
         />
-        <!-- <span class="pi pi-user text-xl"></span> -->
       </button>
       <div
         id="user-dropdown"
@@ -40,12 +39,15 @@
         </div>
         <ul class="p-2 text-sm font-medium text-gray-700">
           <li>
-            <a href="#" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900"
+            <a routerLink="dashboard" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900"
               >Dashboard</a
             >
           </li>
           <li>
-            <a href="#" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900">Sign out</a>
+            <a routerLink="/settings" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900">Settings</a>
+          </li>
+          <li>
+            <a routerLink="/login" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900">Sign out</a>
           </li>
         </ul>
       </div>
