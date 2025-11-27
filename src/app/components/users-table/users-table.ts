@@ -1,13 +1,24 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AddUserModalComponent } from "../add-user-modal-component/add-user-modal-component";
+import { UsersService } from '../../services/users/users.service';
+import { iUser } from '../../models/iUsers';
+import { CommonModule } from '@angular/common';
+// import { NgForOf } from "../../node_modules/@angular/common/common_module.d";
 
 @Component({
   selector: 'app-users-table',
-  imports: [AddUserModalComponent],
+  imports: [AddUserModalComponent,CommonModule],
   templateUrl: './users-table.html',
   styleUrl: './users-table.css',
 })
 export class UsersTable {
+  allUsers !:iUser[];
+  constructor(private users:UsersService,private cd:ChangeDetectorRef){
+    this.users.getAllUsers().subscribe((data)=>{
+      this.allUsers = data
+       this.cd.detectChanges()
+    })
+  }
   isModalOpen: boolean = false;
   openModal(): void {
     this.isModalOpen = true;
