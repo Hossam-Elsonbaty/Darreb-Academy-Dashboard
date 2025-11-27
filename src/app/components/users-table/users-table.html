@@ -17,6 +17,7 @@
         <tr>
           <th scope="col" class="px-6 py-3 font-medium">Full Name</th>
           <th scope="col" class="px-6 py-3 font-medium">Email</th>
+          <th scope="col" class="px-6 py-3 font-medium">Role</th>
           <th scope="col" class="px-6 py-3 font-medium">Action</th>
         </tr>
       </thead>
@@ -27,6 +28,7 @@
             {{ user.fullName }}
           </th>
           <td class="px-6 py-4">{{ user.email }}</td>
+          <td class="px-6 py-4">{{ user.role }}</td>
           <td class="px-6 py-4">
             <div class="flex items-center gap-4">
               <button><span class="pi pi-pencil text-lg text-green-500"></span></button>
