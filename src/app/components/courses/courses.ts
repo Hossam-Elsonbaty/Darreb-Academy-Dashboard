@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-cousres',
+  selector: 'app-courses',
   imports: [],
-  templateUrl: './cousres.html',
-  styleUrl: './cousres.css',
+  templateUrl: './courses.html',
+  styleUrl: './courses.css',
 })
-export class Cousres {
-
-   isModalOpen: boolean = false;
+export class Courses {
+  isModalOpen: boolean = false;
   openModal(): void {
     this.isModalOpen = true;
     console.log("modal opened");
