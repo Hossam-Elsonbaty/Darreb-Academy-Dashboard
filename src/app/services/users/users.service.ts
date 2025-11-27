@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { iUser } from '../../models/iUsers';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,7 +13,10 @@ export class UsersService {
     this.httpHeaders = {
       headers : new HttpHeaders({
         'Content-Type':'application/json'
-      })
+      }),
     }
+  }
+  getAllUsers():Observable<iUser[]>{
+    return this.http.get<iUser[]>(`${environment.apiUrl}/users`,this.httpHeaders);
   }
 }

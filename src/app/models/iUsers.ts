@@ -1,6 +1,7 @@
 export interface iUser {
-  fullname:string
+  fullName:string
   email:string
   password:string
   role:string
+  id?:string
 }
