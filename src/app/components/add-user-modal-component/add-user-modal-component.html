@@ -5,7 +5,7 @@
   <div
     class="bg-white rounded-lg shadow-2xl w-full max-w-md p-6 m-4 transform transition-all duration-300 scale-100"
   >
-    <form (ngSubmit)="addnewuser()"
+    <form (ngSubmit)="addNewUser() " #formRef="ngForm"
 >
       <div class="mb-4">
         <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
@@ -15,9 +15,20 @@
           name="fullName"
           placeholder="e.g., Jane Doe"
           required
-           [(ngModel)]="userprop.fullName"
+          minlength="4"
+           [(ngModel)]="userProp.fullName"
+            #fullName="ngModel"
+           [ngClass]="{'is-invalid':(fullName.touched||fullName.dirty)&&fullName.invalid,'is-valid':fullName.valid}"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
         />
+        <div class="invalid-feedback" *ngIf="(fullName.touched || fullName.dirty) && fullName.invalid">
+          @if(fullName.errors?.['required']){
+          <p class="text-red-500 text-xs">Full Name is required</p>
+          }
+          @else if(fullName.errors?.['minlength']) {
+          <p class="text-red-500 text-xs">Full Name at least 4 chars</p>
+          }
+        </div>
       </div>
       <div class="mb-4">
         <label for="email" class="block text-sm font-medium text-gray-700 mb-1"
@@ -29,9 +40,20 @@
           name="email"
           placeholder="e.g., user@example.com"
           required
-           [(ngModel)]="userprop.email"
+          pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
+          #email="ngModel"
+           [ngClass]="{'is-invalid':(email.touched||email.dirty)&&email.invalid,'is-valid':email.valid}"
+           [(ngModel)]="userProp.email"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
         />
+          <div class="invalid-feedback" *ngIf="(email.touched || email.dirty) && email.invalid">
+            @if(email.errors?.['required']){
+            <p class="text-red-500 text-xs">Email is required</p>
+            }
+            @else if(email.errors?.['pattern']){
+            <p class="text-red-500 text-xs">Wrong pattern.</p>
+            }
+          </div>
       </div>
       <div class="mb-4">
         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
@@ -41,9 +63,20 @@
           name="password"
           placeholder="••••••••"
           required
-           [(ngModel)]="userprop.password"
+          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+          #password="ngModel"
+           [(ngModel)]="userProp.password"
+            [ngClass]="{'is-invalid':(password.touched||password.dirty)&&password.invalid,'is-valid':password.valid}"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
         />
+        <div class="invalid-feedback" *ngIf="(password.touched || password.dirty) && password.invalid">
+          @if(password.errors?.['required']){
+          <p class="text-red-500 text-xs">Password is required</p>
+          }
+          @else if(password.errors?.['pattern']){
+          <p class="text-red-500 text-xs">Minimum eight characters, at least one letter and one number</p>
+          }
+        </div>
       </div>
       <div class="mb-6">
         <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
@@ -51,7 +84,9 @@
           id="role"
           name="role"
           required
-           [(ngModel)]="userprop.role"
+           [(ngModel)]="userProp.role"
+            #role="ngModel"
+              [ngClass]="{'is-invalid':(role.touched||role.dirty)&&role.invalid,'is-valid':role.valid}"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
         >
           <option value="" disabled selected>Select a role</option>
@@ -59,7 +94,12 @@
           <option value="instructor">Instructor</option>
           <option value="admin">Admin</option>
         </select>
-      </div>
+        <div class="invalid-feedback" *ngIf="(role.touched || role.dirty) && role.invalid">
+          @if(role.errors?.['required']){
+          <p class="text-red-500 text-xs">Role is required</p>
+          }
+        </div>
+        </div>
       <div class="flex justify-end space-x-3">
         <button
           (click)="onClose()"
@@ -70,6 +110,7 @@
         </button>
         <button
           type="submit"
+          [disabled]="!formRef.valid"
           class="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors"
         >
           Create User

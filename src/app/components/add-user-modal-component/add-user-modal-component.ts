@@ -15,10 +15,10 @@ export class AddUserModalComponent {
   onClose(): void {
     this.closeModal.emit();
   }
-  userprop: iUser = {} as iUser;
+  userProp: iUser = {} as iUser;
 constructor(private userService: UsersService) {}
-addnewuser(){
-  this.userService.addNewUser(this.userprop).subscribe((data)=>{
+addNewUser(){
+  this.userService.addNewUser(this.userProp).subscribe((data)=>{
     console.log('User added successfully:',data);
 });
 }
