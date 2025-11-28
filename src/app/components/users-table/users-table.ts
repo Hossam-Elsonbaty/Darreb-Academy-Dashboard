@@ -31,4 +31,20 @@ export class UsersTable {
     console.log('New user data:', userData);
     this.closeModalHandler();
   }
+
+
+  deleteUser(id:string):void{
+    try{
+      this.users.deleteUser(id).subscribe((data)=>{
+        this.allUsers = this.allUsers.filter((user) => user.id !== id);
+        console.log('User deleted successfully:',data);
+
+    })
+   }catch(error){
+      console.error('Error deleting user:', error);
+    } 
+    }
+  
+
+
 }
