@@ -15,7 +15,9 @@
       "password": "hashedpassword123",
       "fullName": "Ahmed Ali",
       "role": "student",
-      "enrolledCourses": ["course001"]
+      "enrolledCourses": [
+        "course001"
+      ]
     },
     {
       "id": "usr002",
@@ -24,6 +26,20 @@
       "fullName": "Mona Ibrahim",
       "role": "instructor",
       "enrolledCourses": []
+    },
+    {
+      "id": "4269",
+      "fullName": "rahma",
+      "email": "rhmhmhmd12@gmail.com",
+      "password": "987654321",
+      "role": "student"
+    },
+    {
+      "id": "460a",
+      "fullName": "rahma",
+      "email": "rhmhmhmd12@gmail.com",
+      "password": "987654321",
+      "role": "student"
     }
   ],
   "lectures": [
@@ -169,4 +185,3 @@
     }
   ]
 }
-

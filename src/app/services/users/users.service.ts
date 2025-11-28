@@ -19,4 +19,7 @@ export class UsersService {
   getAllUsers():Observable<iUser[]>{
     return this.http.get<iUser[]>(`${environment.apiUrl}/users`,this.httpHeaders);
   }
+  addNewUser(userobj:iUser):Observable <iUser> {
+    return this.http.post<iUser>(`${environment.apiUrl}/users`, userobj, this.httpHeaders);
+}
 }
