@@ -19,22 +19,23 @@
                 </tr>
             </thead>
             <tbody>
+               @for (course of allCourses ; track course.id) {
                 <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default">
 
                     <td class="px-6 py-4">
-                        <img src="https://picsum.photos/200" alt="thumbnail" class="w-16 h-16 rounded object-cover">
+                        <img [src]="course.thumbnail" alt="thumbnail" class="w-16 h-16 rounded object-cover">
                     </td>
                     <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                        Full Web Development
+                        {{ course.title }}
                     </td>
 
                     <td class="px-6 py-4">
-                        تطوير الويب الكامل
+                       {{ course.title_ar }}
                     </td>
 
 
                     <td class="px-6 py-4">
-                        $49.99
+                        {{ course.price}}
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-4">
@@ -44,6 +45,7 @@
                     </td>
 
                 </tr>
+                }
             </tbody>
         </table>
     </div>
