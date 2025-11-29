@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-add-user-modal-component',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './add-user-modal-component.html',
   styleUrl: './add-user-modal-component.css',
 })
@@ -16,10 +16,11 @@ export class AddUserModalComponent {
     this.closeModal.emit();
   }
   userProp: iUser = {} as iUser;
-constructor(private userService: UsersService) {}
-addNewUser(){
-  this.userService.addNewUser(this.userProp).subscribe((data)=>{
-    console.log('User added successfully:',data);
-});
-}
+  constructor(private userService: UsersService) {}
+  addNewUser() {
+    this.userService.addNewUser(this.userProp).subscribe((data) => {
+      console.log('User added successfully:', data);
+      this.closeModal.emit();
+    });
+  }
 }
