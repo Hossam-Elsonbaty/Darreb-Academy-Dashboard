@@ -22,4 +22,7 @@ export class UsersService {
   addNewUser(userobj:iUser):Observable <iUser> {
     return this.http.post<iUser>(`${environment.apiUrl}/users`, userobj, this.httpHeaders);
 }
+deleteUser(id:string):Observable<iUser>{
+  return this.http.delete<iUser>(`${environment.apiUrl}/users/${id}`,this.httpHeaders); 
+}
 }
