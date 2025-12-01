@@ -20,17 +20,29 @@ export class UsersTable {
     })
   }
   isModalOpen: boolean = false;
-  openModal(): void {
-    this.isModalOpen = true;
-    console.log("modal opened");
+
+  openModal(user?: iUser): void {
+  this.isModalOpen = true;
+  if (user) {
+    this.selectedUser = user;
+  } else {
+    this.selectedUser = null;
   }
+   this.isModalOpen = true;
+  console.log("modal opened");
+
+}
   closeModalHandler(): void {
     this.isModalOpen = false;
+
   }
+
+
   onUserCreated(userData: any): void {
     console.log('New user data:', userData);
     this.closeModalHandler();
   }
+
   deleteUser(id:string):void{
     try{
       this.users.deleteUser(id).subscribe((data)=>{
@@ -41,4 +53,20 @@ export class UsersTable {
       console.error('Error deleting user:', error);
     }
   }
+
+selectedUser: iUser | null = null
+updateUser(id: string): void {
+
+  const userToEdit = this.allUsers.find(u => u.id === id);
+  if (userToEdit) {
+
+    this.openModal(userToEdit);
+  }
+  
+}
+
+
+
+
+
 }

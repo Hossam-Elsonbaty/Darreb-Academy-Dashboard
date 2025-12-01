@@ -8,15 +8,7 @@
       "description_ar": "تعلم تطوير الواجهة الأمامية والخلفية."
     }
   ],
-  "users": [
-    {
-      "id": "8f16",
-      "password": "hossam123",
-      "role": "admin",
-      "fullName": "hossam sonbaty",
-      "email": "armaggg3@gmail.com"
-    }
-  ],
+  "users": [],
   "lectures": [
     {
       "id": "lec001",
