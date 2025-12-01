@@ -32,7 +32,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-4">
-                            <button><span class="pi pi-pencil text-lg text-green-500"></span></button>
+                            <button (click)="updateCategory(course.id)"><span class="pi pi-pencil text-lg text-green-500"></span></button>
                             <button><span class="pi pi-trash text-lg text-red-500"></span></button>
                         </div>
                     </td>
@@ -43,5 +43,5 @@
         </table>
     </div>
 </div>
-<app-add-category [isOpen]="isModalOpen" (closeModal)="closeModalHandler()" (categoryAdded)="onCategoryCreated($event)"></app-add-category>
+<app-add-category [isOpen]="isModalOpen" [categoryToEdit]="selectedCategory" (closeModal)="closeModalHandler()" (categoryAdded)="onCategoryCreated($event)"></app-add-category>
 

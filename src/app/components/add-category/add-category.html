@@ -5,7 +5,7 @@
   <div
     class="bg-white rounded-lg shadow-2xl w-full max-w-md p-6 m-4 transform transition-all duration-300 scale-100"
   >
-    <form class="max-w-sm mx-auto" (ngSubmit)="addNewCategory()" #AddCategory="ngForm">
+    <form class="max-w-sm mx-auto" (ngSubmit)="handleSubmit()" #AddCategory="ngForm">
       <div class="mb-5">
         <label for="name" class="block mb-2.5 text-sm font-medium text-heading"
           >Category Name</label
@@ -99,7 +99,7 @@
           type="submit"
           class="text-white bg-green-500 box-border border border-transparent hover:bg-green-700 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
         >
-          Create Category
+         {{ categoryToEdit ? 'Update category' : 'Create category`' }}
         </button>
       </div>
     </form>
