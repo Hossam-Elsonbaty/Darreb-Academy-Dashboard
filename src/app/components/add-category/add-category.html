@@ -1,0 +1,110 @@
+@if (isOpen){
+<div
+  class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/20 bg-opacity-50 backdrop-blur-sm"
+>
+  <div
+    class="bg-white rounded-lg shadow-2xl w-full max-w-md p-6 m-4 transform transition-all duration-300 scale-100"
+  >
+    <form class="max-w-sm mx-auto" (ngSubmit)="addNewCategory()" #AddCategory="ngForm">
+      <div class="mb-5">
+        <label for="name" class="block mb-2.5 text-sm font-medium text-heading"
+          >Category Name</label
+        >
+        <input
+          [(ngModel)]="categoryProp.name"
+          type="text"
+          minlength="5"
+          #name="ngModel"
+          name="name"
+          id="name"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:border-green-500 focus:ring-2 focus:ring-green-500 block w-full px-3 py-2.5 shadow placeholder:text-body invalid:border-red-500 invalid:ring-red-500"
+          placeholder="New Category"
+          required
+          [ngClass]="{
+            'border-red-500 ring-red-500': (name.touched || name.dirty) && name.invalid,
+            'border-green-500 ring-green-500': name.valid
+          }"
+        />
+        <div class="min-h-5 mt-1">
+          @if(name.errors?.['required']){
+          <p class="text-red-500 text-sm mt-1">Category Name is required</p>
+          }@else if (name.errors?.['minlength']) {
+          <p class="text-red-500 text-sm mt-1">Category Name at least 5 chars</p>
+          }
+        </div>
+      </div>
+      <div class="mb-5">
+        <label
+          for="name-ar"
+          class="block mb-2.5 text-sm font-medium text-heading invalid:border-red-500 invalid:ring-red-500"
+          >Cartegory name_arabic</label
+        >
+        <input
+          [(ngModel)]="categoryProp.name_ar"
+          type="text"
+          #name_ar="ngModel"
+          [ngClass]="{
+            'border-red-500 ring-red-500': (name_ar.touched || name_ar.dirty) && name_ar.invalid,
+            'border-green-500 ring-green-500': name_ar.valid
+          }"
+          minlength="4"
+          name="name_ar"
+          id="name-ar"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:border-green-500 focus:ring-2 focus:ring-green-500 block w-full px-3 py-2.5 shadow placeholder:text-body"
+          required
+        />
+        <div class="min-h-5 mt-1">
+          @if(name_ar.errors?.['required']){
+          <p class="text-red-500 text-sm mt-1">Category Name is required</p>
+          }@else if (name_ar.errors?.['minlength']) {
+          <p class="text-red-500 text-sm mt-1">Category Name at least 4 chars</p>
+          }
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label for="desc" class="block mb-2.5 text-sm font-medium text-heading">Description</label>
+        <input
+          [(ngModel)]="categoryProp.description"
+          type="text"
+          #description="ngModel"
+          name="description"
+          id="desc"
+          placeholder="Description"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:border-green-500 focus:ring-2 focus:ring-green-500 block w-full px-3 py-2.5 shadow placeholder:text-body"
+        />
+      </div>
+
+      <div class="mb-5">
+        <label for="desc-ar" class="block mb-2.5 text-sm font-medium text-heading"
+          >Description_arabic</label
+        >
+        <input
+          [(ngModel)]="categoryProp.description_ar"
+          type="text"
+          #description_ar="ngModel"
+          name="description_ar"
+          id="desc-ar"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:border-green-500 focus:ring-2 focus:ring-green-500 block w-full px-3 py-2.5 shadow placeholder:text-body"
+        />
+      </div>
+      <div class="flex justify-end space-x-4">
+        <button
+          (click)="onClose()"
+          type="button"
+          class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          [disabled]="AddCategory.invalid"
+          type="submit"
+          class="text-white bg-green-500 box-border border border-transparent hover:bg-green-700 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+        >
+          Create Category
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}

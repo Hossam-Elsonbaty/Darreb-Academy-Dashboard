@@ -1,0 +1,47 @@
+
+<div class="flex flex-col gap-5">
+    <div class="border-l-4 border-green-400 pl-5 flex justify-between items-center">
+        <h1 class="font-bold text-2xl w-fit">Cousres Table</h1>
+        <button
+        (click)="openModal()"
+            class="w-max p-2 flex items-center gap-3 px-4 text-lg rounded-lg bg-green-500 text-white cursor-pointer">
+            <span class="pi pi-plus text-lg"></span>
+            Add New category
+        </button>
+    </div>
+    <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+        <table class="w-full text-sm text-left rtl:text-right text-body">
+            <thead class="bg-neutral-secondary-soft border-b border-default">
+                <tr>
+                    <th class="px-6 py-3 font-medium">name</th>
+                    <th class="px-6 py-3 font-medium">name_ar</th>
+                    <th class="px-6 py-3 font-medium">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+               @for (course of allCategories ; track course.id) {
+                <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default">
+
+
+                    <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                        {{ course.name }}
+                    </td>
+
+                    <td class="px-6 py-4">
+                       {{ course.name_ar }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-4">
+                            <button><span class="pi pi-pencil text-lg text-green-500"></span></button>
+                            <button><span class="pi pi-trash text-lg text-red-500"></span></button>
+                        </div>
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-add-category [isOpen]="isModalOpen" (closeModal)="closeModalHandler()" (categoryAdded)="onCategoryCreated($event)"></app-add-category>
+
