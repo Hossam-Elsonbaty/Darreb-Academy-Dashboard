@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { ICategory } from '../../models/i-category';
-import { CategoriesService } from '../../services/categories.service';
-import { AddCategory } from "../add-category/add-category";
+import { CategoriesService } from '../../services/categories/categories.service';
+import { AddCategory } from '../add-category/add-category';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -22,17 +22,14 @@ export class Categories {
   isModalOpen: boolean = false;
   openModal(): void {
     this.isModalOpen = true;
-    console.log("modal opened");
-     this.cd.detectChanges();
-
+    console.log('modal opened');
   }
   closeModalHandler(): void {
     this.isModalOpen = false;
-     this.cd.detectChanges();
   }
   onCategoryCreated(categoryData: ICategory): void {
     console.log('New category data:', categoryData);
-    this.allCategories.push(categoryData)
+    this.allCategories.push(categoryData);
     this.closeModalHandler();
   }
 }

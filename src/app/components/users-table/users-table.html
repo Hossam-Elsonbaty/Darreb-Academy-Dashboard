@@ -41,5 +41,5 @@
     </table>
   </div>
 </div>
-<app-add-user-modal-component [isOpen]="isModalOpen"  [userToEdit]="selectedUser" (closeModal)="closeModalHandler()" >
+<app-add-user-modal-component [isOpen]="isModalOpen"  [userToEdit]="selectedUser" (closeModal)="closeModalHandler()"(userUpdated)="onUserUpdate($event)" (refreshList)="onUserCreated($event)">
 </app-add-user-modal-component>

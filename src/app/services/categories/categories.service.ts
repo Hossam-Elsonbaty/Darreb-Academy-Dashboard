@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICategory } from '../models/i-category';
-import { environment } from '../environments/environment';
+import { ICategory } from '../../models/i-category';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriesService {
-   httpHeaders={}
+  httpHeaders={}
   constructor(private http:HttpClient){
     this.httpHeaders = {
       headers : new HttpHeaders({

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ICourse } from '../../models/i-course';
-import { CoursesService } from '../../services/courses.service';
+import { CoursesService } from '../../services/courses/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -9,7 +9,7 @@ import { CoursesService } from '../../services/courses.service';
   styleUrl: './courses.css',
 })
 export class Courses {
-    allCourses !:ICourse[];
+  allCourses !:ICourse[];
   constructor(private courses:CoursesService,private cd:ChangeDetectorRef){
     this.courses.getAllCourses().subscribe((data)=>{
       this.allCourses = data
@@ -29,5 +29,4 @@ export class Courses {
     console.log('New Cousre data:', CourseData);
     this.closeModalHandler();
   }
-
 }

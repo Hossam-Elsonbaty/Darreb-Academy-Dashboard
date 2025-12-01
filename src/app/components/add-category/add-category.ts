@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ICategory } from '../../models/i-category';
-import { CategoriesService } from '../../services/categories.service';
+import { CategoriesService } from '../../services/categories/categories.service';
 @Component({
   selector: 'app-add-category',
   imports: [FormsModule, CommonModule],
@@ -10,7 +10,7 @@ import { CategoriesService } from '../../services/categories.service';
   styleUrl: './add-category.css',
 })
 export class AddCategory {
- @Input() isOpen: boolean = false;
+  @Input() isOpen: boolean = false;
   @Output() closeModal = new EventEmitter<void>();
   @Output() categoryAdded  = new EventEmitter<ICategory>();
   onClose(): void {
