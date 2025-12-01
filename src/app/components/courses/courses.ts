@@ -1,16 +1,17 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { ICourse } from '../../models/i-course';
 import { CoursesService } from '../../services/courses/courses.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './courses.html',
-  styleUrl: './courses.css',
+  styleUrls: ['./courses.css'],
 })
 export class Courses {
   allCourses !:ICourse[];
-  constructor(private courses:CoursesService,private cd:ChangeDetectorRef){
+  constructor(@Inject(CoursesService) private courses: CoursesService, private cd: ChangeDetectorRef){
     this.courses.getAllCourses().subscribe((data)=>{
       this.allCourses = data
       console.log(data);

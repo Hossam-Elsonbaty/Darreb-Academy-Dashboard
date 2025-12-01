@@ -7,6 +7,7 @@ import { UsersTable } from './components/users-table/users-table';
 import { Dashboard } from './components/dashboard/dashboard';
 import { Courses } from './components/courses/courses';
 import { Categories } from './components/categories/categories';
+import { CreateCoursePage } from './components/create-course-page/create-course-page';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: Dashboard, title: 'Dashboard' },
       { path: 'users', component: UsersTable, title: 'Users' },
       { path: 'courses', component: Courses, title: 'Courses' },
+      { path: 'create-course', component: CreateCoursePage, title: 'Create course' },
       { path: 'categories', component: Categories, title: 'categories' },
     ],
   },

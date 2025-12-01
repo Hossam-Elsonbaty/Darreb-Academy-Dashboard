@@ -1,0 +1,95 @@
+<div class="max-w-7xl mx-auto p-6">
+  <h2 class="text-2xl font-bold mb-4">
+    {{ isEdit ? 'Edit Course' : 'Create Course' }}
+  </h2>
+
+  <form [formGroup]="form" class="space-y-8">
+    <!-- BASIC INFO -->
+    <section class="grid grid-cols-2 gap-4">
+      <input class="input" formControlName="title" placeholder="Title" />
+      <input class="input" formControlName="title_ar" placeholder="Arabic Title" />
+
+      <textarea class="input col-span-2" formControlName="description"></textarea>
+      <textarea class="input col-span-2" formControlName="description_ar"></textarea>
+
+      <input type="number" class="input" formControlName="price" />
+
+      <input type="file" (change)="handleFile($event)" />
+
+      <select class="input" formControlName="level">
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+
+      <label class="flex items-center gap-2">
+        <input type="checkbox" formControlName="isPublished" /> Published
+      </label>
+
+      <div>
+        <strong>Total Duration:</strong>
+        <span>{{ form.get('duration')?.value }} min</span>
+      </div>
+    </section>
+
+    <!-- CATEGORY & INSTRUCTOR -->
+    <section class="grid grid-cols-2 gap-4">
+      <select class="input" formControlName="category">
+        @for (c of categories ; track c.id) {
+        <option [ngValue]="c">{{ c.name }}</option>
+        }
+      </select>
+
+      <select class="input" formControlName="instructor">
+        @for (i of instructors ; track i.id) {
+        <option [ngValue]="i">{{ i.fullName }}</option>
+        }
+      </select>
+    </section>
+
+    <!-- CHAPTERS -->
+    <section formArrayName="chapters">
+      @for (ch of chapters.controls; let ci = $index; track ci) {
+
+      <div class="border p-4 mb-4" [formGroupName]="ci">
+        <input class="input" formControlName="title" placeholder="Chapter title" />
+
+        <p class="text-sm mt-1">Duration: {{ ch.get('duration')?.value }} min</p>
+
+        <!-- LECTURES -->
+        <div formArrayName="lectures">
+          @for (lec of lectures(ci).controls; let li = $index; track li) {
+
+          <div class="bg-gray-100 p-3 mt-2" [formGroupName]="li">
+            <input class="input" formControlName="title" placeholder="Lecture Title" />
+
+            <input
+              type="number"
+              class="input mt-1"
+              formControlName="duration"
+              (input)="calcChapter(ci)"
+            />
+
+            <button class="text-red-500 text-sm mt-1" type="button" (click)="removeLecture(ci, li)">
+              Remove lecture
+            </button>
+          </div>
+          }
+        </div>
+
+        <button class="btn mt-2" type="button" (click)="addLecture(ci)">Add Lecture</button>
+
+        <button class="btn-secondary mt-2" type="button" (click)="removeChapter(ci)">
+          Delete Chapter
+        </button>
+      </div>
+      }
+
+      <button class="btn" type="button" (click)="addChapter()">+ Add Chapter</button>
+    </section>
+
+    <div>
+      <button class="btn-primary" type="button" (click)="submit()">Save Course</button>
+    </div>
+  </form>
+</div>
