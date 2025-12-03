@@ -1,95 +1,128 @@
-<div class="max-w-7xl mx-auto p-6">
-  <h2 class="text-2xl font-bold mb-4">
-    {{ isEdit ? 'Edit Course' : 'Create Course' }}
-  </h2>
-
-  <form [formGroup]="form" class="space-y-8">
-    <!-- BASIC INFO -->
-    <section class="grid grid-cols-2 gap-4">
-      <input class="input" formControlName="title" placeholder="Title" />
-      <input class="input" formControlName="title_ar" placeholder="Arabic Title" />
-
-      <textarea class="input col-span-2" formControlName="description"></textarea>
-      <textarea class="input col-span-2" formControlName="description_ar"></textarea>
-
-      <input type="number" class="input" formControlName="price" />
-
-      <input type="file" (change)="handleFile($event)" />
-
-      <select class="input" formControlName="level">
-        <option value="beginner">Beginner</option>
-        <option value="intermediate">Intermediate</option>
-        <option value="advanced">Advanced</option>
-      </select>
-
-      <label class="flex items-center gap-2">
-        <input type="checkbox" formControlName="isPublished" /> Published
-      </label>
-
-      <div>
-        <strong>Total Duration:</strong>
-        <span>{{ form.get('duration')?.value }} min</span>
-      </div>
-    </section>
-
-    <!-- CATEGORY & INSTRUCTOR -->
-    <section class="grid grid-cols-2 gap-4">
-      <select class="input" formControlName="category">
-        @for (c of categories ; track c.id) {
-        <option [ngValue]="c">{{ c.name }}</option>
-        }
-      </select>
-
-      <select class="input" formControlName="instructor">
-        @for (i of instructors ; track i.id) {
-        <option [ngValue]="i">{{ i.fullName }}</option>
-        }
-      </select>
-    </section>
-
-    <!-- CHAPTERS -->
-    <section formArrayName="chapters">
-      @for (ch of chapters.controls; let ci = $index; track ci) {
-
-      <div class="border p-4 mb-4" [formGroupName]="ci">
-        <input class="input" formControlName="title" placeholder="Chapter title" />
-
-        <p class="text-sm mt-1">Duration: {{ ch.get('duration')?.value }} min</p>
-
-        <!-- LECTURES -->
-        <div formArrayName="lectures">
-          @for (lec of lectures(ci).controls; let li = $index; track li) {
-
-          <div class="bg-gray-100 p-3 mt-2" [formGroupName]="li">
-            <input class="input" formControlName="title" placeholder="Lecture Title" />
-
+<div class="max-w-6xl mx-auto p-8 bg-white shadow-2xl rounded-xl">
+  <div class="flex items-center space-x-3 border-b pb-4 mb-8">
+    <svg
+      class="w-8 h-8 text-green-600"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 6.253v13m0-13C10.832 5.477 9.221 4.5 7.5 4.5c-1.552 0-2.859.658-3.75 1.76l-.681 1.036c-1.095 1.625-1.923 3.522-1.923 5.378 0 1.954.908 3.738 2.342 4.882m1.336-3.711a.75.75 0 010-1.08c1.355-1.355 2.72-2.72 4.074-4.075C10.742 2.923 9.221 4.5 7.5 4.5c-1.552 0-2.859.658-3.75 1.76l-.681 1.036c-1.095 1.625-1.923 3.522-1.923 5.378 0 1.954.908 3.738 2.342 4.882m0-8.529.743.348A.75.75 0 0115 13.5v3.375c0 .621-.503 1.125-1.125 1.125H12.75l-.375 2.25H21A1.5 1.5 0 0022.5 18V13.5z"
+      ></path>
+    </svg>
+    <h2 class="text-3xl font-extrabold text-gray-900">Create New Course</h2>
+  </div>
+  <form class="space-y-10">
+    <section class="p-6 border border-gray-200 rounded-xl bg-gray-50 shadow-inner">
+      <h3 class="text-xl font-semibold text-gray-800 mb-5 border-b pb-2">Course Basics</h3>
+      <div class="flex flex-col md:flex-row flex-wrap gap-6">
+        <input
+          class="w-full md:w-[calc(50%-12px)] p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out outline-none"
+          formControlName="title"
+          placeholder="Title (English)"
+        />
+        <input
+          class="outline-none w-full md:w-[calc(50%-12px)] p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
+          formControlName="title_ar"
+          placeholder="Arabic Title (العنوان بالعربية)"
+        />
+        <textarea
+          rows="4"
+          class="outline-none w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
+          formControlName="description"
+          placeholder="Course Description (English)"
+        ></textarea>
+        <textarea
+          rows="4"
+          class="outline-none w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
+          formControlName="description_ar"
+          placeholder="Course Description (الوصف بالعربية)"
+        ></textarea>
+        <div class="flex flex-col sm:flex-row items-end gap-6 justify-start w-full">
+          <div class="flex-1 min-w-[150px]">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <select
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
+              formControlName="category"
+            >
+              <option value="" disabled selected>Select Category</option>
+            </select>
+          </div>
+          <div class="flex-1 min-w-[100px]">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Price ($)</label>
             <input
               type="number"
-              class="input mt-1"
-              formControlName="duration"
-              (input)="calcChapter(ci)"
+              class="outline-none w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
+              formControlName="price"
+              placeholder="e.g., 99.99"
             />
-
-            <button class="text-red-500 text-sm mt-1" type="button" (click)="removeLecture(ci, li)">
-              Remove lecture
-            </button>
           </div>
-          }
+          <div class="flex-1 min-w-[150px]">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Difficulty Level</label>
+            <select
+              class="outline-none w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
+              formControlName="level"
+            >
+              <option value="" disabled selected>Select Level</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
         </div>
-
-        <button class="btn mt-2" type="button" (click)="addLecture(ci)">Add Lecture</button>
-
-        <button class="btn-secondary mt-2" type="button" (click)="removeChapter(ci)">
-          Delete Chapter
-        </button>
+        <div class="w-full flex items-center justify-between gap-6 flex-wrap pt-4 border-t border-gray-200 mt-4">
+          <div class="w-1/2 ">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Course Thumbnail</label>
+            <input
+              type="file"
+              class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 outline-none file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+            />
+          </div>
+          <div class="flex items-center gap-4">
+            <label
+              class="flex items-center space-x-2 p-3 rounded-xl bg-white border border-gray-300 shadow-sm cursor-pointer hover:bg-gray-50 transition duration-150"
+            >
+              <input
+                type="checkbox"
+                formControlName="isPublished"
+                class="outline-none w-5 h-5 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500"
+              />
+              <span class="text-gray-700 font-medium">Published</span>
+            </label>
+            <div
+              class="p-3 bg-green-100 text-green-700 font-semibold rounded-lg shadow-sm whitespace-nowrap"
+            >
+              Total Duration: <span class="text-lg">0 min</span>
+            </div>
+          </div>
+        </div>
       </div>
-      }
-
-      <button class="btn" type="button" (click)="addChapter()">+ Add Chapter</button>
     </section>
-
-    <div>
-      <button class="btn-primary" type="button" (click)="submit()">Save Course</button>
+    <div class="pt-6 border-t mt-8">
+      <button
+        class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-bold rounded-full shadow-xl text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 ease-in-out transform hover:scale-[1.01]"
+        type="button"
+      >
+        <svg
+          class="w-6 h-6 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        Save Course
+      </button>
     </div>
   </form>
 </div>

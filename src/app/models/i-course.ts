@@ -1,10 +1,4 @@
-// export interface ICourse {
-//   id:string
-//   title:string
-//   title_ar:string
-//   thumbnail:string
-//   price:number
-// }
+
 
 import { ICategory } from "./i-category";
 
@@ -23,7 +17,7 @@ export interface IChapter {
   title_ar: string;
   duration: number;
   order: number;
-  lectures: ILecture[];
+  lectures?: ILecture[];
 }
 export interface IInstructor {
 id: string;
@@ -39,10 +33,10 @@ export interface ICourse {
   description_ar: string;
   price: number;
   thumbnail: string;
-  instructor: IInstructor;
+  instructor?: IInstructor;
   category: ICategory;
   level: string;
   duration: number;
   isPublished: boolean;
-  chapters: IChapter[];
+  chapters?: IChapter[];
 }
