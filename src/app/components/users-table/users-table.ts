@@ -3,10 +3,11 @@ import { AddUserModalComponent } from "../add-user-modal-component/add-user-moda
 import { UsersService } from '../../services/users/users.service';
 import { iUser } from '../../models/iUsers';
 import { CommonModule } from '@angular/common';
+import { PopDeleteComponent } from '../pop-delete/pop-delete';
 
 @Component({
   selector: 'app-users-table',
-  imports: [AddUserModalComponent,CommonModule],
+  imports: [AddUserModalComponent,CommonModule,PopDeleteComponent],
   templateUrl: './users-table.html',
   styleUrl: './users-table.css',
 })
@@ -31,14 +32,35 @@ export class UsersTable {
     console.log('New user data:', userData);
     this.closeModalHandler();
   }
-  deleteUser(id:string):void{
-    try{
-      this.users.deleteUser(id).subscribe((data)=>{
-        this.allUsers = this.allUsers.filter((user) => user.id !== id);
-        console.log('User deleted successfully:',data);
-    })}
-    catch(error){
-      console.error('Error deleting user:', error);
-    }
-  }
+  // deleteUser(id:string):void{
+  //   try{
+  //     this.users.deleteUser(id).subscribe((data)=>{
+  //       this.allUsers = this.allUsers.filter((user) => user.id !== id);
+  //       console.log('User deleted successfully:',data);
+  //   })}
+
+  //   catch(error){
+  //     console.error('Error deleting user:', error);
+  //   }
+  // }
+  deleteModalOpen: boolean = false;
+itemToDelete: string | null = null;
+
+openDeleteModal(id: string): void {
+  this.itemToDelete = id;
+  this.deleteModalOpen = true;
+}
+
+closeDeleteModal(): void {
+  this.deleteModalOpen = false;
+  this.itemToDelete = null;
+}
+
+confirmDeleteHandler(id: string): void {
+  this.users.deleteUser(id).subscribe(() => {
+    this.allUsers = this.allUsers.filter(user => user.id !== id);
+    this.closeDeleteModal();
+  });
+}
+
 }
