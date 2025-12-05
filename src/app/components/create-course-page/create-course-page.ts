@@ -1,5 +1,4 @@
 import { CoursesService } from './../../services/courses/courses.service';
-import { Courses } from './../courses/courses';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -8,8 +7,6 @@ import {
   Validators,
   ɵInternalFormsSharedModule,
 } from '@angular/forms';
-import { AddCourse } from '../../services/courses/add-course';
-import { Router } from '@angular/router';
 import { ICourse } from '../../models/i-course';
 import { CategoriesService } from '../../services/categories/categories.service';
 import { CommonModule } from '@angular/common';
@@ -26,11 +23,10 @@ export class CreateCoursePage {
   courses: ICourse[] = [];
   categories: ICategory[] = [];
   constructor(
-    private addCourseService: AddCourse,
+    private addCourseService: CoursesService,
     private categoriesService: CategoriesService,
     private coursesService: CoursesService,
     private fb: FormBuilder,
-    private router: Router
   ) {
     this.courseProp = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
@@ -56,7 +52,7 @@ export class CreateCoursePage {
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.courseProp.patchValue({
-          thumbnail: reader.result // Base64 Image String
+          thumbnail: reader.result
         });
       };
     }

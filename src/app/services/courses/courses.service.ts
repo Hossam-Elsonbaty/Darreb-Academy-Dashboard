@@ -19,4 +19,7 @@ export class CoursesService {
   getAllCourses(): Observable<ICourse[]> {
     return this.http.get<ICourse[]>(`${environment.apiUrl}/courses`, this.httpHeaders);
   }
+  addCourse(courseObj:ICourse): Observable<ICourse> {
+    return this.http.post<ICourse>(`${environment.apiUrl}/courses`,courseObj, this.httpHeaders);
+  }
 }
