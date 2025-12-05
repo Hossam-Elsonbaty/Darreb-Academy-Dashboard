@@ -20,10 +20,22 @@ export class Categories {
     });
   }
   isModalOpen: boolean = false;
-  openModal(): void {
-    this.isModalOpen = true;
-    console.log('modal opened');
-  }
+    openModal(category?: ICategory): void {
+      this.isModalOpen = true;
+      if (category) {
+        this.selectedCategory = category;
+      } else {
+        this.selectedCategory = null;
+      }
+      this.isModalOpen = true;
+      console.log('modal opened');
+    }
+
+  // isModalOpen: boolean = false;
+  // openModal(): void {
+  //   this.isModalOpen = true;
+  //   console.log('modal opened');
+  // }
   closeModalHandler(): void {
     this.isModalOpen = false;
   }
@@ -32,4 +44,17 @@ export class Categories {
     this.allCategories.push(categoryData);
     this.closeModalHandler();
   }
+  onCategoryUpdate(categoryData: ICategory): void {
+      console.log('New category data:', categoryData);
+      const updatedCategoryIndex = this.allCategories.findIndex(ele=>ele.id == categoryData.id)
+      this.allCategories[updatedCategoryIndex] = categoryData;
+      this.closeModalHandler();
+    }
+  selectedCategory: ICategory | null = null;
+    updateCategory(id: string): void {
+      const categoryToEdit = this.allCategories.find((cat) => cat.id === id);
+      if (categoryToEdit) {
+        this.openModal(categoryToEdit);
+      }
+    }
 }

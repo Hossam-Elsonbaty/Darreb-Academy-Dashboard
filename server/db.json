@@ -2,14 +2,14 @@
   "categories": [
     {
       "id": "cat001",
-      "name": "Web Development",
-      "name_ar": "تطوير الويب",
+      "name": "Web dev",
+      "name_ar": "تطوير",
       "description": "Learn frontend & backend development.",
       "description_ar": "تعلم تطوير الواجهة الأمامية والخلفية."
     },
     {
       "id": "a8a2",
-      "name": "UI/UX Design",
+      "name": "UI/UX Design a",
       "name_ar": "تصميم واجهات المستخدم",
       "description_ar": "تصميم واجهات المستخدم هو إنشاء واجهات واضحة وجذابة وسهلة الاستخدام للمواقع والتطبيقات.",
       "description": "UI Design is the process of creating clear, attractive, and easy-to-use interfaces for websites and apps."

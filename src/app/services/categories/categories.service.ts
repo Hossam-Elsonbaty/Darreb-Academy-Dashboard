@@ -21,6 +21,7 @@ export class CategoriesService {
     }
       addNewCategory(categoryobj:ICategory):Observable <ICategory>{ {
         return this.http.post<ICategory>(`${environment.apiUrl}/categories`, categoryobj, this.httpHeaders);
-    }
-}
+    }}
+    updateCategory(id:string,categoryobj:ICategory):Observable<ICategory>{
+      return this.http.put<ICategory>(`${environment.apiUrl}/categories/${id}`,categoryobj,this.httpHeaders)}
 }
