@@ -9,7 +9,7 @@
     },
     {
       "id": "a8a2",
-      "name": "UI/UX Design a",
+      "name": "UI/UX Design ",
       "name_ar": "تصميم واجهات المستخدم",
       "description_ar": "تصميم واجهات المستخدم هو إنشاء واجهات واضحة وجذابة وسهلة الاستخدام للمواقع والتطبيقات.",
       "description": "UI Design is the process of creating clear, attractive, and easy-to-use interfaces for websites and apps."
@@ -165,5 +165,27 @@
       "rating": 5,
       "comment": "Great course!"
     }
-  ]
+  ],
+  "analytics": {
+    "totalUsers": 1450,
+    "totalPurchasedCourses": 320,
+    "totalIncome": 12500,
+    "totalCourses": 42,
+    "purchasesByMonth": [
+      { "month": "Jan", "purchases": 20 },
+      { "month": "Feb", "purchases": 35 },
+      { "month": "Mar", "purchases": 60 },
+      { "month": "Apr", "purchases": 40 }
+    ],
+    "purchasesByCategory": [
+      { "category": "Programming", "value": 45 },
+      { "category": "Design", "value": 25 },
+      { "category": "AI", "value": 15 },
+      { "category": "Marketing", "value": 15 }
+    ],
+    "recentPurchases": [
+      { "id": 1, "user": "Ali", "course": "React", "price": 50, "date": "2024-01-04" },
+      { "id": 2, "user": "Mona", "course": "UI/UX", "price": 70, "date": "2024-01-03" }
+    ]
+  }
 }
