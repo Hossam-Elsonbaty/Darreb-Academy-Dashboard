@@ -31,8 +31,8 @@
           <td class="px-6 py-4">{{ user.role }}</td>
           <td class="px-6 py-4">
             <div class="flex items-center gap-4">
-              <button (click)="updateUser(user.id)"><span class="pi pi-pencil text-lg text-green-500"></span></button>
-              <button (click)=" deleteUser(user.id)" ><span class="pi pi-trash text-lg text-red-500"></span></button>
+              <button class="cursor-pointer" (click)="updateUser(user.id)"><span class="pi pi-pencil text-lg text-green-500"></span></button>
+              <button class="cursor-pointer" (click)=" deleteUser(user.id)" ><span class="pi pi-trash text-lg text-red-500"></span></button>
             </div>
           </td>
         </tr>

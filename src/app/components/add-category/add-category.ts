@@ -20,25 +20,15 @@ export class AddCategory {
     this.closeModal.emit();
     this.categoryProp = {} as ICategory;
   }
-   ngOnChanges() {
+  ngOnChanges() {
       if (this.categoryToEdit) {
         this.categoryProp = { ...this.categoryToEdit };
       } else {
         this.categoryProp = {} as ICategory;
       }
     }
-
   categoryProp: ICategory = {} as ICategory;
   constructor(private categoryService: CategoriesService) {}
-  // addNewCategory() {
-  //   this.categoryService.addNewCategory(this.categoryProp).subscribe((data) => {
-  //     console.log('category added successfully:', data);
-  //     this.categoryAdded.emit(data);
-  //     this.closeModal.emit();
-  //   });
-  // }
-
-
     handleSubmit() {
       if (this.categoryToEdit && this.categoryToEdit.id) {
         this.categoryService.updateCategory(this.categoryToEdit.id, this.categoryProp).subscribe({
@@ -56,7 +46,7 @@ export class AddCategory {
         console.log('category added successfully:', data);
         this.categoryAdded.emit(data);
         this.refreshList.emit(data);
-         this.closeModal.emit();
+        this.closeModal.emit();
     });
       }
     }

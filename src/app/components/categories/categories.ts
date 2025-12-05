@@ -30,12 +30,6 @@ export class Categories {
       this.isModalOpen = true;
       console.log('modal opened');
     }
-
-  // isModalOpen: boolean = false;
-  // openModal(): void {
-  //   this.isModalOpen = true;
-  //   console.log('modal opened');
-  // }
   closeModalHandler(): void {
     this.isModalOpen = false;
   }

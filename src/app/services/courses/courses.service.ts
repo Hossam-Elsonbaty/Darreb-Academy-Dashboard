@@ -19,6 +19,4 @@ export class CoursesService {
   getAllCourses(): Observable<ICourse[]> {
     return this.http.get<ICourse[]>(`${environment.apiUrl}/courses`, this.httpHeaders);
   }
-
-
 }

@@ -1,65 +1,81 @@
 import { CoursesService } from './../../services/courses/courses.service';
 import { Courses } from './../courses/courses';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  ɵInternalFormsSharedModule,
+} from '@angular/forms';
 import { AddCourse } from '../../services/courses/add-course';
 import { Router } from '@angular/router';
 import { ICourse } from '../../models/i-course';
 import { CategoriesService } from '../../services/categories/categories.service';
 import { CommonModule } from '@angular/common';
+import { ICategory } from '../../models/i-category';
 @Component({
   selector: 'app-create-course-page',
-  imports: [CommonModule,ɵInternalFormsSharedModule,ReactiveFormsModule],
+  imports: [CommonModule, ɵInternalFormsSharedModule, ReactiveFormsModule],
   templateUrl: './create-course-page.html',
   styleUrl: './create-course-page.css',
 })
-export class CreateCoursePage  {
-  courseprop : FormGroup;
+export class CreateCoursePage {
+  selectedFile: File | null = null;
+  courseProp: FormGroup;
   courses: ICourse[] = [];
-  categories: { id: string; name: string }[] = [];
-    constructor(private addcourseservice: AddCourse,
-      private categoriesService:CategoriesService,
-    private  coursesService:CoursesService, private fb: FormBuilder,private router: Router) {
-    this.courseprop = this.fb.group({
+  categories: ICategory[] = [];
+  constructor(
+    private addCourseService: AddCourse,
+    private categoriesService: CategoriesService,
+    private coursesService: CoursesService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.courseProp = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       title_ar: ['', [Validators.required]],
       description: ['', [Validators.required]],
       description_ar: ['', [Validators.required]],
       price: ['', [Validators.required]],
       level: ['', [Validators.required]],
-      category: ['', [Validators.required]]
+      thumbnail: ['', [Validators.required]],
+      category: ['', [Validators.required]],
     });
-    this.coursesService.getAllCourses().subscribe((data)=>{
+    this.coursesService.getAllCourses().subscribe((data) => {
       this.courses = data;
-    })
-
-
+    });
     this.categoriesService.getAllCategories().subscribe((data) => {
       this.categories = data;
     });
-
-
   }
-  addCourse(){
-      // @Input() isOpen: boolean = false;
-    if(this.courseprop.valid){
-      this.addcourseservice.addCourse(this.courseprop.value).subscribe({
-        next: (data) => {
-        console.log('Product added successfully:', data);
-        alert('Product added successfully!');
-
-          this.courses.push(data);
-          this.courseprop.reset();
-
-      },
-      error: (err) => {
-        console.error('Error adding product:', err);
-      }
-      })
-
-    console.log(this.courseprop.value);
-    console.log(this.courseprop.get('title')?.value);
+  onFileSelect(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.courseProp.patchValue({
+          thumbnail: reader.result // Base64 Image String
+        });
+      };
     }
-
+  }
+  addCourse() {
+    if (this.courseProp.valid) {
+      this.addCourseService.addCourse(this.courseProp.value).subscribe({
+        next: (data) => {
+          console.log('Product added successfully:', data);
+          alert('Product added successfully!');
+          this.courses.push(data);
+          this.courseProp.reset();
+        },
+        error: (err) => {
+          console.error('Error adding product:', err);
+        },
+      });
+      console.log(this.courseProp.value);
+      console.log(this.courseProp.get('title')?.value);
+    }
   }
 }
