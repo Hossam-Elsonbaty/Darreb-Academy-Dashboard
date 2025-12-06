@@ -21,11 +21,14 @@ export class UsersService {
   }
   addNewUser(userobj:iUser):Observable <iUser> {
     return this.http.post<iUser>(`${environment.apiUrl}/users`, userobj, this.httpHeaders);
-}
-deleteUser(id:string):Observable<iUser>{
-  return this.http.delete<iUser>(`${environment.apiUrl}/users/${id}`,this.httpHeaders);
-}
-updateUser(id:string,userobj:iUser):Observable<iUser>{
-  return this.http.put<iUser>(`${environment.apiUrl}/users/${id}`,userobj,this.httpHeaders);
-}
+  }
+  deleteUser(id:string):Observable<iUser>{
+    return this.http.delete<iUser>(`${environment.apiUrl}/users/${id}`,this.httpHeaders);
+  }
+  updateUser(id:string,userobj:iUser):Observable<iUser>{
+    return this.http.put<iUser>(`${environment.apiUrl}/users/${id}`,userobj,this.httpHeaders);
+  }
+  signIn(email:string,password:string){
+    return this.http.post<any>(`${environment.endPointUrl}/login`,this.httpHeaders);
+  }
 }

@@ -4,4 +4,5 @@ export interface iUser {
   password:string
   role:string
   id:string
+  profilePic:string
 }
