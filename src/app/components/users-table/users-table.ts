@@ -44,23 +44,42 @@ export class UsersTable {
   //   }
   // }
   deleteModalOpen: boolean = false;
-itemToDelete: string | null = null;
-
+  itemToDelete: string | null = null;
+  isDeleting: boolean = false; 
+ successMessage: string = '';
+  errorMessage: string = '';
 openDeleteModal(id: string): void {
-  this.itemToDelete = id;
-  this.deleteModalOpen = true;
-}
+    this.itemToDelete = id;
+    this.deleteModalOpen = true;
+    // مسح الرسائل السابقة
+    this.successMessage = '';
+    this.errorMessage = '';
+  }
 
-closeDeleteModal(): void {
-  this.deleteModalOpen = false;
-  this.itemToDelete = null;
-}
+ closeDeleteModal(): void {
+    this.deleteModalOpen = false;
+    this.itemToDelete = null;
+  }
+
 
 confirmDeleteHandler(id: string): void {
-  this.users.deleteUser(id).subscribe(() => {
-    this.allUsers = this.allUsers.filter(user => user.id !== id);
-    this.closeDeleteModal();
+  this.isDeleting = true;
+  this.errorMessage = '';
+
+  this.users.deleteUser(id).subscribe({
+    next: () => {
+      this.allUsers = this.allUsers.filter(user => user.id !== id);
+      this.closeDeleteModal();
+      this.isDeleting = false;
+    },
+    error: (err) => {
+      this.errorMessage = 'Failed to delete user.';
+      console.error(err);
+      this.isDeleting = false;
+    }
   });
 }
 
+
 }
+

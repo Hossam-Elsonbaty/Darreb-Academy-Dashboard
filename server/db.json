@@ -8,15 +8,7 @@
       "description_ar": "تعلم تطوير الواجهة الأمامية والخلفية."
     }
   ],
-  "users": [
-    {
-      "id": "e4fa",
-      "fullName": "asdasd",
-      "email": "madanyo84@gmail.com",
-      "password": "sdfsdfsdS222",
-      "role": "student"
-    }
-  ],
+  "users": [],
   "lectures": [
     {
       "id": "lec001",

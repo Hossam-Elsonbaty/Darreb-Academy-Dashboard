@@ -19,4 +19,9 @@ export class CoursesService {
     getAllCourses():Observable<ICourse[]>{
       return this.http.get<ICourse[]>(`${environment.apiUrl}/courses`,this.httpHeaders);
     }
+
+    deleteUser(id:string):Observable<ICourse>{
+     
+      return this.http.delete<ICourse>(`${environment.apiUrl}/courses/${id}`,this.httpHeaders); 
+    }
 }
