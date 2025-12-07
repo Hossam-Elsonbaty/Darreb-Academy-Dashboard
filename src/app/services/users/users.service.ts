@@ -29,6 +29,6 @@ export class UsersService {
     return this.http.put<iUser>(`${environment.apiUrl}/users/${id}`,userobj,this.httpHeaders);
   }
   signIn(email:string,password:string){
-    return this.http.post<any>(`${environment.endPointUrl}/login`,this.httpHeaders);
+    return this.http.post<any>(`${environment.endPointUrl}/auth/login`,{email,password},this.httpHeaders);
   }
 }

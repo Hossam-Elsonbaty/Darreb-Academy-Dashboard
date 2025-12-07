@@ -39,16 +39,16 @@ export class Login {
         if (res.success) {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('user', JSON.stringify(res.data));
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['home/dashboard']);
           console.log(res.data);
         }
       },
       error: (err) => {
-        this.loading = false;
         this.errorMsg = err.error?.message || 'Login failed';
-        console.log(err);
+        console.log(err.error.message);
         this.cd.detectChanges()
-      }
+        this.loading = false;
+      },
     });
   }
 }
