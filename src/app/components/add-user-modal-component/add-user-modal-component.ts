@@ -29,8 +29,9 @@ export class AddUserModalComponent implements OnChanges {
   }
   constructor(private userService: UsersService) {}
   handleSubmit() {
-    if (this.userToEdit && this.userToEdit.id) {
-      this.userService.updateUser(this.userToEdit.id, this.userProp).subscribe({
+    console.log("clicked");
+    if (this.userToEdit && this.userToEdit._id) {
+      this.userService.updateUser(this.userToEdit._id, this.userProp).subscribe({
         next: (updatedUser) => {
           console.log('User updated successfully:', updatedUser);
           this.userUpdated.emit(updatedUser);
@@ -41,10 +42,15 @@ export class AddUserModalComponent implements OnChanges {
         },
       });
     } else {
-      this.userService.addNewUser(this.userProp).subscribe((data) => {
-        console.log('User added successfully:', data);
-        this.refreshList.emit(data);
-        this.closeModal.emit();
+      this.userService.addNewUser(this.userProp).subscribe({
+        next: (userAdded) => {
+          console.log('User added successfully:', userAdded);
+          this.refreshList.emit(userAdded);
+          this.closeModal.emit();
+        },
+        error: (error) => {
+          console.error('Error updating user:', error);
+        },
       });
     }
   }

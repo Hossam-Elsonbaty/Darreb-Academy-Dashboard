@@ -17,16 +17,16 @@ export class UsersService {
     }
   }
   getAllUsers():Observable<iUser[]>{
-    return this.http.get<iUser[]>(`${environment.apiUrl}/users`,this.httpHeaders);
+    return this.http.get<iUser[]>(`${environment.endPointUrl}/users/get-all-users`,this.httpHeaders);
   }
-  addNewUser(userobj:iUser):Observable <iUser> {
-    return this.http.post<iUser>(`${environment.apiUrl}/users`, userobj, this.httpHeaders);
+  addNewUser(userObj:iUser):Observable <iUser> {
+    return this.http.post<iUser>(`${environment.endPointUrl}/users/create-user`, userObj, this.httpHeaders);
   }
   deleteUser(id:string):Observable<iUser>{
     return this.http.delete<iUser>(`${environment.apiUrl}/users/${id}`,this.httpHeaders);
   }
-  updateUser(id:string,userobj:iUser):Observable<iUser>{
-    return this.http.put<iUser>(`${environment.apiUrl}/users/${id}`,userobj,this.httpHeaders);
+  updateUser(id:string,userObj:iUser):Observable<iUser>{
+    return this.http.put<iUser>(`${environment.endPointUrl}/users/update-user/${id}`,userObj,this.httpHeaders);
   }
   signIn(email:string,password:string){
     return this.http.post<any>(`${environment.endPointUrl}/auth/login`,{email,password},this.httpHeaders);

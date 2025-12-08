@@ -3,6 +3,7 @@ import { AddUserModalComponent } from '../add-user-modal-component/add-user-moda
 import { UsersService } from '../../services/users/users.service';
 import { iUser } from '../../models/iUsers';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-table',
@@ -12,11 +13,24 @@ import { CommonModule } from '@angular/common';
 })
 export class UsersTable {
   allUsers!: iUser[];
-  constructor(private users: UsersService, private cd: ChangeDetectorRef) {
-    this.users.getAllUsers().subscribe((data) => {
-      this.allUsers = data;
-      console.log(data);
-      this.cd.detectChanges();
+  ;
+  constructor(private users: UsersService, private cd: ChangeDetectorRef,private router: Router) {
+    this.users.getAllUsers().subscribe( {
+      // console.log(data);
+      // this.cd.detectChanges();
+      next: (res) => {
+        if (res) {
+          this.allUsers = res;
+          console.log(res);
+        }
+        this.cd.detectChanges()
+      },
+      error: (err) => {
+        if (err.status == 401){
+          window.location.href = 'login';
+        }
+        console.log(err.error.message);
+      },
     });
   }
   isModalOpen: boolean = false;
@@ -28,7 +42,6 @@ export class UsersTable {
       this.selectedUser = null;
     }
     this.isModalOpen = true;
-    console.log('modal opened');
   }
   closeModalHandler(): void {
     this.isModalOpen = false;
@@ -40,14 +53,14 @@ export class UsersTable {
   }
   onUserUpdate(userData: iUser): void {
     console.log('New user data:', userData);
-    const updatedUserIndex = this.allUsers.findIndex(ele=>ele.id == userData.id)
+    const updatedUserIndex = this.allUsers.findIndex(ele=>ele._id == userData._id)
     this.allUsers[updatedUserIndex] = userData;
     this.closeModalHandler();
   }
   deleteUser(id: string): void {
     try {
       this.users.deleteUser(id).subscribe((data) => {
-        this.allUsers = this.allUsers.filter((user) => user.id !== id);
+        this.allUsers = this.allUsers.filter((user) => user._id !== id);
         console.log('User deleted successfully:', data);
       });
     } catch (error) {
@@ -56,8 +69,9 @@ export class UsersTable {
   }
   selectedUser: iUser | null = null;
   updateUser(id: string): void {
-    const userToEdit = this.allUsers.find((u) => u.id === id);
+    const userToEdit = this.allUsers.find((u) => u._id === id);
     if (userToEdit) {
+      console.log(userToEdit);
       this.openModal(userToEdit);
     }
   }

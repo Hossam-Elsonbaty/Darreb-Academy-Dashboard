@@ -39,7 +39,9 @@ export class Login {
         if (res.success) {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('user', JSON.stringify(res.data));
-          this.router.navigate(['home/dashboard']);
+          this.router.navigate(['/home/dashboard'], {
+            replaceUrl: true
+          });
           console.log(res.data);
         }
       },

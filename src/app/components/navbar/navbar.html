@@ -2,7 +2,7 @@
   <div class="flex items-center justify-between  p-4 md:gap-x-4">
     <a href="#" class="flex items-center space-x-3">
       <img src="Logo.png" class="h-7 rounded-lg" alt=" Logo" />
-      <h1 class="text-2xl font-bold text-gray-900">Good morning,Smith</h1>
+      <h1 class="text-2xl font-bold text-gray-900">Good morning,{{userData?.fullName}}</h1>
     </a>
     <div class="order-2 md:order-2 w-full md:w-64 mt-3 md:mt-0 ml-auto">
       <div class="relative">
@@ -34,12 +34,12 @@
         class="z-50 hidden bg-white border border-gray-200 rounded-lg shadow-lg w-44"
       >
         <div class="px-4 py-3 text-sm border-b border-gray-200">
-          <span class="block font-medium text-gray-900">Joseph McFall</span>
-          <span class="block text-gray-500 truncate">name@flowbite.com</span>
+          <span class="block font-medium text-gray-900">{{userData?.fullName}}</span>
+          <span class="block text-gray-500 truncate">{{userData?.email}}</span>
         </div>
         <ul class="p-2 text-sm font-medium text-gray-700">
           <li>
-            <a routerLink="dashboard" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900"
+            <a routerLink="/home/dashboard" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900"
               >Dashboard</a
             >
           </li>
@@ -47,7 +47,7 @@
             <a routerLink="/settings" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900">Settings</a>
           </li>
           <li>
-            <a routerLink="/login" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900">Sign out</a>
+            <button (click)="logout()" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900">Sign out</button>
           </li>
         </ul>
       </div>
