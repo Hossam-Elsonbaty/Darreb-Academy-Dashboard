@@ -22,4 +22,7 @@ export class CoursesService {
   addCourse(courseObj:ICourse): Observable<ICourse> {
     return this.http.post<ICourse>(`${environment.apiUrl}/courses`,courseObj, this.httpHeaders);
   }
+  getCourseById(courseId:string): Observable<ICourse> {
+    return this.http.get<ICourse>(`${environment.apiUrl}/courses/${courseId}`, this.httpHeaders);
+  }
 }
