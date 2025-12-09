@@ -30,11 +30,11 @@ export class AddCategory {
   categoryProp: ICategory = {} as ICategory;
   constructor(private categoryService: CategoriesService) {}
     handleSubmit() {
-      if (this.categoryToEdit && this.categoryToEdit.id) {
-        this.categoryService.updateCategory(this.categoryToEdit.id, this.categoryProp).subscribe({
-          next: (updatedCategory) => {
-            console.log('Course updated successfully:', updatedCategory);
-            this.categoryUpdated.emit(updatedCategory);
+      if (this.categoryToEdit && this.categoryToEdit._id) {
+        this.categoryService.updateCategory(this.categoryToEdit._id, this.categoryProp).subscribe({
+          next: (res) => {
+            console.log('Course updated successfully:', res);
+            this.categoryUpdated.emit(res.data);
             this.closeModal.emit();
           },
           error: (error) => {
@@ -42,10 +42,10 @@ export class AddCategory {
           },
         });
       } else {
-        this.categoryService.addNewCategory(this.categoryProp).subscribe((data) => {
-        console.log('category added successfully:', data);
-        this.categoryAdded.emit(data);
-        this.refreshList.emit(data);
+        this.categoryService.addNewCategory(this.categoryProp).subscribe((res) => {
+        console.log('category added successfully:', res);
+        this.categoryAdded.emit(res.data);
+        this.refreshList.emit(res.data);
         this.closeModal.emit();
     });
       }

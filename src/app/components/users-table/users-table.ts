@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
 })
 export class UsersTable {
   allUsers!: iUser[];
-  ;
+  isDeleteModalOpen: boolean = false;
+  userIdToDelete: string | null = null;
+
   constructor(private users: UsersService, private cd: ChangeDetectorRef,private router: Router) {
     this.users.getAllUsers().subscribe( {
-      // console.log(data);
-      // this.cd.detectChanges();
       next: (res) => {
         if (res) {
           this.allUsers = res;
@@ -35,12 +35,7 @@ export class UsersTable {
   }
   isModalOpen: boolean = false;
   openModal(user?: iUser): void {
-    this.isModalOpen = true;
-    if (user) {
-      this.selectedUser = user;
-    } else {
-      this.selectedUser = null;
-    }
+    this.selectedUser = user ?? null;
     this.isModalOpen = true;
   }
   closeModalHandler(): void {
@@ -75,4 +70,27 @@ export class UsersTable {
       this.openModal(userToEdit);
     }
   }
+    openDeleteModal(id: string) {
+    this.userIdToDelete = id;
+    this.isDeleteModalOpen = true;
+  }
+  cancelDelete() {
+    this.userIdToDelete = null;
+    this.isDeleteModalOpen = false;
+    this.cd.detectChanges();
+  }
+  confirmDeleteYes() {
+  if (this.userIdToDelete) {
+    this.users.deleteUser(this.userIdToDelete).subscribe({
+      next: () => {
+        this.allUsers = this.allUsers.filter(
+          (user) => user._id !== this.userIdToDelete
+        );
+        console.log('User deleted and table updated!');
+        this.cancelDelete();
+      },
+      error: (err) => console.error(err),
+    });
+  }
+}
 }

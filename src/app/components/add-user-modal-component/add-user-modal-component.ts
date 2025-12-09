@@ -32,9 +32,9 @@ export class AddUserModalComponent implements OnChanges {
     console.log("clicked");
     if (this.userToEdit && this.userToEdit._id) {
       this.userService.updateUser(this.userToEdit._id, this.userProp).subscribe({
-        next: (updatedUser) => {
-          console.log('User updated successfully:', updatedUser);
-          this.userUpdated.emit(updatedUser);
+        next: (res) => {
+          console.log('User updated successfully:', res.data);
+          this.userUpdated.emit(res.data);
           this.closeModal.emit();
         },
         error: (error) => {
