@@ -75,7 +75,7 @@ export class CourseChapters {
     this.closeModalHandler();
   }
   updateChapter(id: string): void {
-  const chapterToEdit = this.chapters.find((ch) => ch.id === id);
+  const chapterToEdit = this.chapters.find((ch) => ch._id === id);
   if (chapterToEdit) {
     this.openChapterModal(chapterToEdit);
   }
@@ -83,7 +83,7 @@ export class CourseChapters {
 
 
   onChapterUpdate(updated: IChapter) {
-    const index = this.chapters.findIndex(c => c.id === updated.id);
+    const index = this.chapters.findIndex(c => c._id === updated._id);
     if (index !== -1) {
       this.chapters[index] = updated;
     }
@@ -116,7 +116,7 @@ export class CourseChapters {
     if (this.chapterIdToDelete) {
      this.coursesService.deleteChapter( this.chapterIdToDelete).subscribe({
         next: () => {
-         this.chapters = this.chapters.filter(ch => ch.id !== this.chapterIdToDelete);
+         this.chapters = this.chapters.filter(ch => ch._id !== this.chapterIdToDelete);
 
           console.log('chapter deleted and table updated!');
           this.cancelDelete();

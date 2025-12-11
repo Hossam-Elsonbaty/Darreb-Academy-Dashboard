@@ -6,7 +6,6 @@
     class="bg-white rounded-lg shadow-2xl w-full max-w-md p-6 m-4 transform transition-all duration-300"
   >
     <form (ngSubmit)="handleChapterSubmit()" #formRef="ngForm">
-
       <!-- Title -->
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
@@ -18,8 +17,7 @@
           required
           [(ngModel)]="chapterProp.title"
           #title="ngModel"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
-                 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
         />
 
         <p class="text-red-500 text-xs" *ngIf="title.invalid && (title.dirty || title.touched)">
@@ -37,11 +35,13 @@
           required
           [(ngModel)]="chapterProp.title_ar"
           #titleAr="ngModel"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
-                 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
         />
 
-        <p class="text-red-500 text-xs" *ngIf="titleAr.invalid && (titleAr.dirty || titleAr.touched)">
+        <p
+          class="text-red-500 text-xs"
+          *ngIf="titleAr.invalid && (titleAr.dirty || titleAr.touched)"
+        >
           Arabic title is required
         </p>
       </div>
@@ -50,8 +50,7 @@
         <button
           type="button"
           (click)="onClose()"
-          class="cursor-pointer px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200
-                 rounded-md hover:bg-gray-300 transition-colors"
+          class="cursor-pointer px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
         >
           Cancel
         </button>
@@ -59,14 +58,12 @@
         <button
           type="submit"
           [disabled]="!formRef.valid"
-          class="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-green-500
-                 rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2
-                 focus:ring-green-500 focus:ring-offset-2 transition-colors"
+          class="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors"
         >
           {{ chapterToEdit ? 'Update Chapter' : 'Create Chapter' }}
         </button>
       </div>
-
     </form>
   </div>
-</div>}
+</div>
+}

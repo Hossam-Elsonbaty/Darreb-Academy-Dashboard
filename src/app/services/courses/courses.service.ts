@@ -33,21 +33,17 @@ export class CoursesService {
   }
   addChapter(courseId: string, chapterData: IChapter): Observable<IChapter> {
     return this.http.post<IChapter>(
-      `${environment.apiUrl}/chapters`,
-      { ...chapterData, courseId },
-      this.httpHeaders
+      `${environment.endPointTestUrl}/api/chapters/create-chapter`,
+      { ...chapterData, courseId }
     );
   }
   updateChapter(chapterId: string, chapterData: IChapter): Observable<IChapter> {
-  return this.http.put<IChapter>(
-    `${environment.apiUrl}/chapters/${chapterId}`,
-    chapterData,
-    this.httpHeaders
-  );
+    return this.http.put<IChapter>(
+      `${environment.endPointTestUrl}/api/chapters/${chapterId}`,
+      chapterData,
+    );
   }
   deleteChapter(chapterId: string): Observable<any> {
-  return this.http.delete( `${environment.apiUrl}/chapters/${chapterId}`,
-    this.httpHeaders
-  );
+    return this.http.delete( `${environment.endPointTestUrl}/api/chapters/${chapterId}`);
   }
 }

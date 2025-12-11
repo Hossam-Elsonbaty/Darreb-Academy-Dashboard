@@ -31,12 +31,14 @@ export class AddChapterModalComponent implements OnChanges {
     } else {
       this.chapterProp = {} as IChapter;
     }
+    console.log(this.chapterToEdit);
+
   }
   constructor(private courseService: CoursesService) {}
   handleChapterSubmit() {
-     if (this.chapterToEdit && this.chapterToEdit.id) {
+     if (this.chapterToEdit && this.chapterToEdit._id) {
       this.courseService
-        .updateChapter( this.chapterToEdit.id, this.chapterProp)
+        .updateChapter( this.chapterToEdit._id, this.chapterProp)
         .subscribe({
           next: (res) => {
             console.log('Chapter updated:', res);

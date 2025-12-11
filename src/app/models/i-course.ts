@@ -10,7 +10,7 @@ export interface ILecture {
 }
 
 export interface IChapter {
-  id: string;
+  _id: string;
   title: string;
   title_ar: string;
   duration: number;
