@@ -2,14 +2,17 @@ import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { ICourse } from '../../models/i-course';
 import { CoursesService } from '../../services/courses/courses.service';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-courses',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './courses.html',
   styleUrls: ['./courses.css'],
 })
 export class Courses {
+  isDeleteModalOpen: boolean = false;
+  courseIdToDelete: string | null = null;
   allCourses !:ICourse[];
   constructor(@Inject(CoursesService) private courses: CoursesService, private cd: ChangeDetectorRef){
     this.courses.getAllCourses().subscribe((data)=>{
@@ -30,4 +33,28 @@ export class Courses {
     console.log('New Cousre data:', CourseData);
     this.closeModalHandler();
   }
+      openDeleteModal(id: string) {
+    this.courseIdToDelete = id;
+    this.isDeleteModalOpen = true;
+  }
+  cancelDelete() {
+    this.courseIdToDelete = null;
+    this.isDeleteModalOpen = false;
+    this.cd.detectChanges();
+  }
+  confirmDeleteYes() {
+  if (this.courseIdToDelete) {
+    this.courses.deleteCourse(this.courseIdToDelete).subscribe({
+      next: () => {
+        this.allCourses = this.allCourses.filter(
+          (course) => course._id !== this.courseIdToDelete
+        );
+        console.log('User deleted and table updated!');
+        this.cancelDelete();
+      },
+      error: (err) => console.error(err),
+    });
+  }
+}
+
 }

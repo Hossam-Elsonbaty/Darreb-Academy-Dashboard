@@ -50,7 +50,9 @@
               formControlName="category"
             >
               <option value="" disabled selected>Select Category</option>
-              <option *ngFor="let cat of categories" [value]="cat._id">{{ cat.name }}</option>
+              @for(cat of categories ; track cat._id){
+                <option [value]="cat._id">{{ cat.name }}</option>
+              }
             </select>
           </div>
           <div class="flex-1 min-w-[100px]">
@@ -68,7 +70,7 @@
               class="outline-none w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
               formControlName="level"
             >
-              <option value="" disabled selected>Select Level</option>
+              <option value="" disabled >Select Level</option>
               <option value="beginner">Beginner</option>
               <option value="intermediate">Intermediate</option>
               <option value="advanced">Advanced</option>
@@ -83,8 +85,17 @@
             <input
               (change)="onFileSelect($event)"
               type="file"
+              accept="image/*"
               class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 outline-none file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
             />
+            @if(imagePreview != null){
+              <div class="mt-4">
+                <img
+                  [src]="imagePreview"
+                  class="w-48 h-32 object-cover rounded-lg shadow-md border"
+                />
+              </div>
+            }
           </div>
           <div class="flex items-center gap-4">
             <label

@@ -1,7 +1,7 @@
 import { ICategory } from "./i-category";
 
 export interface ILecture {
-  id: string;
+  _id: string;
   title: string;
   title_ar: string;
   videoUrl: string;
@@ -18,13 +18,13 @@ export interface IChapter {
   lectures?: ILecture[];
 }
 export interface IInstructor {
-id: string;
+_id: string;
 email?: string;
 fullName: string;
 role?: string;
 }
 export interface ICourse {
-  id: string;
+  _id: string;
   title: string;
   title_ar: string;
   description: string;

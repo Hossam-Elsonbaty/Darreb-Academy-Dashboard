@@ -24,6 +24,7 @@ export const routes: Routes = [
       { path: 'courses', component: Courses, title: 'Courses' },
       { path: 'course-chapters/:id', component: CourseChapters, title: 'Course Chapters' },
       { path: 'create-course', component: CreateCoursePage, title: 'Create course' },
+      { path: 'update-course/:id', component: CreateCoursePage, title: 'Update course' },
       { path: 'update-course', component: UpdateCoursePage, title: 'Update course' },
       { path: 'categories', component: Categories, title: 'categories' },
     ],
