@@ -27,28 +27,7 @@
       "order": 1
     }
   ],
-  "chapters": [
-    {
-      "id": "chap001",
-      "title": "Basics of Web",
-      "title_ar": "أساسيات الويب",
-      "lectures": [
-        {
-          "lecture": {
-            "id": "lec001",
-            "title": "Introduction to HTML",
-            "title_ar": "مقدمة في HTML",
-            "videoUrl": "https://videos/html-intro.mp4",
-            "duration": 300,
-            "order": 1
-          },
-          "order": 1
-        }
-      ],
-      "duration": 300,
-      "order": 1
-    }
-  ],
+  "chapters": [],
   "courses": [
     {
       "id": "course001",
