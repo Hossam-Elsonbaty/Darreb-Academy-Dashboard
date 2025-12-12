@@ -2,7 +2,7 @@
   <div class="border-l-4 border-green-400 pl-5 flex justify-between items-center">
     <h1 class="font-bold text-2xl w-fit">Lectures</h1>
     <button
-      (click)="openChapterModal()"
+      (click)="openLectureModal()"
       class="w-max p-2 flex items-center gap-3 px-4 text-lg rounded-lg bg-green-500 text-white cursor-pointer"
     >
       <span class="pi pi-plus text-lg"></span>
@@ -32,7 +32,12 @@
             {{ lecture.title_ar }}
           </td>
           <td class="px-6 py-4">
-            {{ lecture.duration }}
+            @if (lecture.duration > 60){
+              {{ lecture.duration/60 }}m
+            }
+            @else{
+              {{ lecture.duration }}s
+            }
           </td>
           <td class="px-6 py-4">
             <div class="flex items-center gap-4">
@@ -42,9 +47,6 @@
               <button class="cursor-pointer" (click)="openDeleteLectureModal(lecture._id)">
                 <span class="pi pi-trash text-lg text-red-500"></span>
               </button>
-              <a class="cursor-pointer" [routerLink]="['/home/chapter-lectures', lecture._id]">
-                <span class="pi pi-trash text-lg text-red-500"></span>
-              </a>
             </div>
           </td>
         </tr>
@@ -78,13 +80,13 @@
       </div>
     </div>
   </div>
-  <app-add-chapter-modal-component
+  <app-add-lecture-modal
     [isOpen]="isLectureModalOpen"
-    [courseId]="chapterId"
-    [chapterToEdit]="selectedLecture"
-    (refreshList)="onChapterCreated($event)"
-    (chapterUpdated)="onChapterUpdate($event)"
+    [chapterId]="chapterId"
+    [lectureToEdit]="selectedLecture"
+    (refreshList)="onLectureCreated($event)"
+    (lectureUpdated)="onLectureUpdate($event)"
     (closeModal)="isLectureModalOpen = false"
   >
-  </app-add-chapter-modal-component>
+  </app-add-lecture-modal>
 </div>

@@ -5,6 +5,7 @@ export interface ILecture {
   title: string;
   title_ar: string;
   videoUrl: string;
+  videoId: string;
   duration: number;
   order: number;
 }

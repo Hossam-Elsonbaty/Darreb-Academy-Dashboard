@@ -1,13 +1,14 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { IChapter, ICourse } from '../../models/i-course';
+import { ICourse, ILecture } from '../../models/i-course';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CoursesService } from '../../services/courses/courses.service';
 import { AddChapterModalComponent } from "../add-chapter-modal-component/add-chapter-modal-component";
 import { CommonModule } from '@angular/common';
+import { AddLectureModal } from "../add-lecture-modal/add-lecture-modal";
 
 @Component({
   selector: 'app-chapter-lectures',
-  imports: [AddChapterModalComponent,CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AddLectureModal],
   templateUrl: './chapter-lectures.html',
   styleUrl: './chapter-lectures.css',
 })
@@ -15,14 +16,14 @@ import { CommonModule } from '@angular/common';
 export class ChapterLectures {
 
   isLoading: boolean = true;
-  course: ICourse | null = null;
+  // course: ICourse | null = null;
   chapterId: string = '';
-  lectures: IChapter[] = [];
+  lectures: ILecture[] = [];
 
   isLectureModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
 
-  selectedLecture: IChapter | null = null;
+  selectedLecture: ILecture | null = null;
   lectureIdToDelete: string | null = null;
 
   constructor(
@@ -40,17 +41,16 @@ export class ChapterLectures {
       return;
     }
 
-    this.loadCourse();
+    this.loadLectures();
   }
 
-  loadCourse() {
-    this.coursesService.getChapterById(this.chapterId).subscribe({
+  loadLectures() {
+    this.coursesService.getAllLectures(this.chapterId).subscribe({
       next: (res) => {
-        this.course = res;
-        this.lectures = res.chapters?.map((c: any) => c.chapter) ?? [];
-
+        console.log(res);
+        this.lectures = res;
+        // this.lectures = res.lectures;
         console.log("Loaded chapters:", this.lectures);
-
         this.isLoading = false;
         this.cd.detectChanges();
       },
@@ -61,8 +61,8 @@ export class ChapterLectures {
     });
   }
 
-  openChapterModal(chapter?: IChapter) {
-    this.selectedLecture = chapter ?? null;
+  openLectureModal(lecture?: ILecture) {
+    this.selectedLecture = lecture ?? null;
     this.isLectureModalOpen = true;
   }
 
@@ -70,19 +70,19 @@ export class ChapterLectures {
     this.isLectureModalOpen = false;
   }
 
-  onChapterCreated(newChapter: IChapter) {
-    this.lectures.push(newChapter);
+  onLectureCreated(newLecture: ILecture) {
+    this.lectures.push(newLecture);
     this.closeModalHandler();
   }
   updateLecture(id: string): void {
-  const chapterToEdit = this.lectures.find((ch) => ch._id === id);
-  if (chapterToEdit) {
-    this.openChapterModal(chapterToEdit);
+  const lectureToEdit = this.lectures.find((ch) => ch._id === id);
+  if (lectureToEdit) {
+    this.openLectureModal(lectureToEdit);
   }
 }
 
 
-  onChapterUpdate(updated: IChapter) {
+  onLectureUpdate(updated: ILecture) {
     const index = this.lectures.findIndex(c => c._id === updated._id);
     if (index !== -1) {
       this.lectures[index] = updated;
@@ -102,7 +102,7 @@ export class ChapterLectures {
   }
   confirmDeleteYes() {
     if (this.lectureIdToDelete) {
-     this.coursesService.deleteChapter( this.lectureIdToDelete).subscribe({
+     this.coursesService.deleteLecture( this.lectureIdToDelete).subscribe({
         next: () => {
          this.lectures = this.lectures.filter(ch => ch._id !== this.lectureIdToDelete);
 

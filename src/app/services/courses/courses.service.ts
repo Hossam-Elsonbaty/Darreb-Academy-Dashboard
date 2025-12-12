@@ -51,19 +51,28 @@ export class CoursesService {
   getChapterById(chapterId:string): Observable<ICourse> {
     return this.http.get<ICourse>(`${environment.endPointTestUrl}/api/chapters/${chapterId}`, this.httpHeaders);
   }
-  addLecture(courseId: string, chapterData: ILecture): Observable<ILecture> {
+  // addLecture(courseId: string, chapterData: ILecture): Observable<ILecture> {
+  //   return this.http.post<ILecture>(
+  //     `${environment.endPointTestUrl}/api/lectures/create-lecture`,
+  //     { ...chapterData, courseId }
+  //   );
+  // }
+  getAllLectures(chapterId : string): Observable<ILecture[]> {
+    return this.http.get<ILecture[]>(`${environment.endPointTestUrl}/api/lectures/${chapterId}`);
+  }
+  addLecture( formData: FormData): Observable<ILecture> {
     return this.http.post<ILecture>(
       `${environment.endPointTestUrl}/api/lectures/create-lecture`,
-      { ...chapterData, courseId }
+      formData
     );
   }
-  updateLecture(chapterId: string, chapterData: ILecture): Observable<ILecture> {
+  updateLecture(chapterId: string, formData: FormData): Observable<ILecture> {
     return this.http.put<ILecture>(
       `${environment.endPointTestUrl}/api/lectures/${chapterId}`,
-      chapterData,
+      formData,
     );
   }
-  deleteLecture(chapterId: string): Observable<any> {
-    return this.http.delete( `${environment.endPointTestUrl}/api/lectures/${chapterId}`);
+  deleteLecture(lectureId: string): Observable<any> {
+    return this.http.delete( `${environment.endPointTestUrl}/api/lectures/${lectureId}`);
   }
 }
