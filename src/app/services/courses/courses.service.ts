@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IChapter, ICourse } from '../../models/i-course';
+import { IChapter, ICourse, ILecture } from '../../models/i-course';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
@@ -31,6 +31,7 @@ export class CoursesService {
   updateCourse(courseId: string, data: FormData): Observable<ICourse> {
     return this.http.put<ICourse>(`${environment.endPointTestUrl}/api/courses/${courseId}`, data);
   }
+  //// Chapter req
   addChapter(courseId: string, chapterData: IChapter): Observable<IChapter> {
     return this.http.post<IChapter>(
       `${environment.endPointTestUrl}/api/chapters/create-chapter`,
@@ -45,5 +46,24 @@ export class CoursesService {
   }
   deleteChapter(chapterId: string): Observable<any> {
     return this.http.delete( `${environment.endPointTestUrl}/api/chapters/${chapterId}`);
+  }
+  //// Lecture req
+  getChapterById(chapterId:string): Observable<ICourse> {
+    return this.http.get<ICourse>(`${environment.endPointTestUrl}/api/chapters/${chapterId}`, this.httpHeaders);
+  }
+  addLecture(courseId: string, chapterData: ILecture): Observable<ILecture> {
+    return this.http.post<ILecture>(
+      `${environment.endPointTestUrl}/api/lectures/create-lecture`,
+      { ...chapterData, courseId }
+    );
+  }
+  updateLecture(chapterId: string, chapterData: ILecture): Observable<ILecture> {
+    return this.http.put<ILecture>(
+      `${environment.endPointTestUrl}/api/lectures/${chapterId}`,
+      chapterData,
+    );
+  }
+  deleteLecture(chapterId: string): Observable<any> {
+    return this.http.delete( `${environment.endPointTestUrl}/api/lectures/${chapterId}`);
   }
 }

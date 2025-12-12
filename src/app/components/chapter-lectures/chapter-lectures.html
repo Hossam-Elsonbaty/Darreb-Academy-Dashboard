@@ -1,12 +1,12 @@
 <div class="flex flex-col gap-5">
   <div class="border-l-4 border-green-400 pl-5 flex justify-between items-center">
-    <h1 class="font-bold text-2xl w-fit">Chapters</h1>
+    <h1 class="font-bold text-2xl w-fit">Lectures</h1>
     <button
       (click)="openChapterModal()"
       class="w-max p-2 flex items-center gap-3 px-4 text-lg rounded-lg bg-green-500 text-white cursor-pointer"
     >
       <span class="pi pi-plus text-lg"></span>
-      Add New chapter
+      Add New Lecture
     </button>
   </div>
 
@@ -23,28 +23,28 @@
         </tr>
       </thead>
       <tbody>
-        @for (chapter of chapters; track chapter._id) {
+        @for (lecture of lectures; track lecture._id) {
         <tr>
           <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-            {{ chapter.title }}
+            {{ lecture.title }}
           </td>
           <td class="px-6 py-4">
-            {{ chapter.title_ar }}
+            {{ lecture.title_ar }}
           </td>
           <td class="px-6 py-4">
-            {{ chapter.duration }}
+            {{ lecture.duration }}
           </td>
           <td class="px-6 py-4">
             <div class="flex items-center gap-4">
-              <a class="cursor-pointer" [routerLink]="['/home/chapter-lectures', chapter._id]">
-                <span class="pi pi-eye text-lg text-blue-500"></span>
-              </a>
-              <button class="cursor-pointer" (click)="updateChapter(chapter._id)">
+              <button class="cursor-pointer" (click)="updateLecture(lecture._id)">
                 <span class="pi pi-pencil text-lg text-green-500"></span>
               </button>
-              <button class="cursor-pointer" (click)="openDeleteChapterModal(chapter._id)">
+              <button class="cursor-pointer" (click)="openDeleteLectureModal(lecture._id)">
                 <span class="pi pi-trash text-lg text-red-500"></span>
               </button>
+              <a class="cursor-pointer" [routerLink]="['/home/chapter-lectures', lecture._id]">
+                <span class="pi pi-trash text-lg text-red-500"></span>
+              </a>
             </div>
           </td>
         </tr>
@@ -79,12 +79,12 @@
     </div>
   </div>
   <app-add-chapter-modal-component
-    [isOpen]="isChapterModalOpen"
-    [courseId]="courseId"
-    [chapterToEdit]="selectedChapter"
+    [isOpen]="isLectureModalOpen"
+    [courseId]="chapterId"
+    [chapterToEdit]="selectedLecture"
     (refreshList)="onChapterCreated($event)"
     (chapterUpdated)="onChapterUpdate($event)"
-    (closeModal)="isChapterModalOpen = false"
+    (closeModal)="isLectureModalOpen = false"
   >
   </app-add-chapter-modal-component>
 </div>

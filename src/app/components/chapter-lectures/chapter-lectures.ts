@@ -5,25 +5,25 @@ import { CoursesService } from '../../services/courses/courses.service';
 import { AddChapterModalComponent } from "../add-chapter-modal-component/add-chapter-modal-component";
 import { CommonModule } from '@angular/common';
 
-
 @Component({
-  selector: 'app-course-chapters',
+  selector: 'app-chapter-lectures',
   imports: [AddChapterModalComponent,CommonModule, RouterLink],
-  templateUrl: './course-chapters.html',
-  styleUrl: './course-chapters.css',
+  templateUrl: './chapter-lectures.html',
+  styleUrl: './chapter-lectures.css',
 })
-export class CourseChapters {
+
+export class ChapterLectures {
 
   isLoading: boolean = true;
   course: ICourse | null = null;
-  courseId: string = '';
-  chapters: IChapter[] = [];
+  chapterId: string = '';
+  lectures: IChapter[] = [];
 
-  isChapterModalOpen: boolean = false;
+  isLectureModalOpen: boolean = false;
   isDeleteModalOpen: boolean = false;
 
-  selectedChapter: IChapter | null = null;
-  chapterIdToDelete: string | null = null;
+  selectedLecture: IChapter | null = null;
+  lectureIdToDelete: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,9 +33,9 @@ export class CourseChapters {
 
   ngOnInit() {
 
-    this.courseId = this.route.snapshot.paramMap.get('id') ?? '';
+    this.chapterId = this.route.snapshot.paramMap.get('id') ?? '';
 
-    if (!this.courseId) {
+    if (!this.chapterId) {
       console.error('NO COURSE ID FOUND IN URL');
       return;
     }
@@ -44,12 +44,12 @@ export class CourseChapters {
   }
 
   loadCourse() {
-    this.coursesService.getCourseById(this.courseId).subscribe({
+    this.coursesService.getChapterById(this.chapterId).subscribe({
       next: (res) => {
         this.course = res;
-        this.chapters = res.chapters?.map((c: any) => c.chapter) ?? [];
+        this.lectures = res.chapters?.map((c: any) => c.chapter) ?? [];
 
-        console.log("Loaded chapters:", this.chapters);
+        console.log("Loaded chapters:", this.lectures);
 
         this.isLoading = false;
         this.cd.detectChanges();
@@ -62,20 +62,20 @@ export class CourseChapters {
   }
 
   openChapterModal(chapter?: IChapter) {
-    this.selectedChapter = chapter ?? null;
-    this.isChapterModalOpen = true;
+    this.selectedLecture = chapter ?? null;
+    this.isLectureModalOpen = true;
   }
 
   closeModalHandler() {
-    this.isChapterModalOpen = false;
+    this.isLectureModalOpen = false;
   }
 
   onChapterCreated(newChapter: IChapter) {
-    this.chapters.push(newChapter);
+    this.lectures.push(newChapter);
     this.closeModalHandler();
   }
-  updateChapter(id: string): void {
-  const chapterToEdit = this.chapters.find((ch) => ch._id === id);
+  updateLecture(id: string): void {
+  const chapterToEdit = this.lectures.find((ch) => ch._id === id);
   if (chapterToEdit) {
     this.openChapterModal(chapterToEdit);
   }
@@ -83,40 +83,28 @@ export class CourseChapters {
 
 
   onChapterUpdate(updated: IChapter) {
-    const index = this.chapters.findIndex(c => c._id === updated._id);
+    const index = this.lectures.findIndex(c => c._id === updated._id);
     if (index !== -1) {
-      this.chapters[index] = updated;
+      this.lectures[index] = updated;
     }
     this.closeModalHandler();
   }
 
-  openDeleteChapterModal(id: string) {
-    this.chapterIdToDelete = id;
+  openDeleteLectureModal(id: string) {
+    this.lectureIdToDelete = id;
     this.isDeleteModalOpen = true;
   }
 
   cancelDelete() {
-    this.chapterIdToDelete = null;
+    this.lectureIdToDelete = null;
     this.isDeleteModalOpen = false;
     this.cd.detectChanges();
   }
-
-  // confirmDeleteYes() {
-  //   if (!this.chapterIdToDelete || !this.courseId) return;
-
-  //   this.coursesService.deleteChapter(this.courseId, this.chapterIdToDelete).subscribe({
-  //     next: () => {
-  //       this.chapters = this.chapters.filter(ch => ch.id !== this.chapterIdToDelete);
-  //       this.cancelDelete();
-  //     },
-  //     error: err => console.error(err),
-  //   });
-  // }
   confirmDeleteYes() {
-    if (this.chapterIdToDelete) {
-     this.coursesService.deleteChapter( this.chapterIdToDelete).subscribe({
+    if (this.lectureIdToDelete) {
+     this.coursesService.deleteChapter( this.lectureIdToDelete).subscribe({
         next: () => {
-         this.chapters = this.chapters.filter(ch => ch._id !== this.chapterIdToDelete);
+         this.lectures = this.lectures.filter(ch => ch._id !== this.lectureIdToDelete);
 
           console.log('chapter deleted and table updated!');
           this.cancelDelete();
@@ -126,3 +114,4 @@ export class CourseChapters {
     }
   }
 }
+
