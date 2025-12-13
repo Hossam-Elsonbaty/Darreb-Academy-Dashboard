@@ -18,9 +18,13 @@
             #title="ngModel"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
-          <p class="text-red-500 text-xs" *ngIf="title.invalid && (title.dirty || title.touched)">
-            Title is required
-          </p>
+          @if((title.touched || title.dirty) && title.invalid){
+            <p
+              class="text-red-500 text-xs mt-3"
+            >
+              title is required
+            </p>
+          }
         </div>
 
         <!-- Title Arabic -->
@@ -34,12 +38,13 @@
             #titleAr="ngModel"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
-          <p
-            class="text-red-500 text-xs"
-            *ngIf="titleAr.invalid && (titleAr.dirty || titleAr.touched)"
-          >
-            Arabic title is required
-          </p>
+          @if((titleAr.touched || titleAr.dirty) && titleAr.invalid){
+            <p
+              class="text-red-500 text-xs mt-3"
+            >
+              Arabic title is required
+            </p>
+          }
         </div>
 
         <!-- File Upload for Video -->
@@ -53,11 +58,12 @@
             (change)="onFileSelected($event)"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
-          <p class="text-red-500 text-xs" *ngIf="!lectureProp.videoUrl">
-            Video is required
-          </p>
+          @if(!selectedVideo){
+            <p class="text-red-500 text-xs mt-3" >
+              Video is required
+            </p>
+          }
         </div>
-
         <div class="flex justify-end space-x-3">
           <button
             type="button"

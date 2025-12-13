@@ -60,11 +60,12 @@
 //       });}
 //   }
 // }
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { ILecture } from '../../models/i-course';
 import { CoursesService } from '../../services/courses/courses.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-lecture-modal',
@@ -92,7 +93,7 @@ export class AddLectureModal implements OnChanges {
     console.log(this.lectureToEdit);
   }
 
-  constructor(private courseService: CoursesService) {}
+  constructor(private courseService: CoursesService,private toastr: ToastrService,private cd: ChangeDetectorRef) {}
 
   onClose(): void {
     this.closeModal.emit();
@@ -105,6 +106,7 @@ export class AddLectureModal implements OnChanges {
     if (file) {
       this.selectedVideo = file;
     }
+    this.cd.detectChanges();
   }
 
   handleLectureSubmit() {
@@ -122,22 +124,26 @@ export class AddLectureModal implements OnChanges {
     if (this.lectureToEdit && this.lectureToEdit._id) {
       this.courseService.updateLecture(this.lectureToEdit._id, formData).subscribe({
         next: (res) => {
+          this.toastr.success("Lecture updated successfully")
           console.log('Lecture updated:', res);
           this.lectureUpdated.emit(res);
           this.closeModal.emit();
         },
         error: (error) => {
+          this.toastr.error("Error updating lecture");
           console.error('Error updating lecture:', error);
         },
       });
     } else {
       this.courseService.addLecture( formData).subscribe({
         next: (res) => {
+          this.toastr.success("Lecture added successfully")
           console.log('Lecture added:', res);
           this.refreshList.emit(res);
           this.closeModal.emit();
         },
         error: (error) => {
+          this.toastr.error("Error adding lecture")
           console.error('Error adding lecture:', error);
         },
       });
