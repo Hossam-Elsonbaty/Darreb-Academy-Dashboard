@@ -11,6 +11,7 @@ import { CreateCoursePage } from './components/create-course-page/create-course-
 import { UpdateCoursePage } from './components/update-course-page/update-course-page';
 import { CourseChapters } from './components/course-chapters/course-chapters';
 import { ChapterLectures } from './components/chapter-lectures/chapter-lectures';
+import { Inbox } from './components/inbox/inbox';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,6 +30,7 @@ export const routes: Routes = [
       { path: 'update-course/:id', component: CreateCoursePage, title: 'Update course' },
       { path: 'update-course', component: UpdateCoursePage, title: 'Update course' },
       { path: 'categories', component: Categories, title: 'categories' },
+      { path: 'inbox', component: Inbox, title: 'inbox' },
     ],
   },
   { path: 'home/users', component: UsersTable, title: 'home/users' },

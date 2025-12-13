@@ -17,6 +17,14 @@
       "role": "student"
     }
   ],
+  "inboxes": [
+    {
+      "id": "4f62",
+      "fullName": "hossam sonbatyy",
+      "email": "armaggg3@gmail.com",
+      "msg": "jtYlpoayZiLcayoQhERoSZ0sS7M5qJObY3nDlC48NMWj3mslrrKuyi"
+    }
+  ],
   "lectures": [
     {
       "id": "lec001",
