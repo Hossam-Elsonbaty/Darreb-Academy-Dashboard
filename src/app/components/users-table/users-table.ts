@@ -4,6 +4,7 @@ import { UsersService } from '../../services/users/users.service';
 import { iUser } from '../../models/iUsers';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users-table',
@@ -16,7 +17,7 @@ export class UsersTable {
   isDeleteModalOpen: boolean = false;
   userIdToDelete: string | null = null;
 
-  constructor(private users: UsersService, private cd: ChangeDetectorRef,private router: Router) {
+  constructor(private users: UsersService, private cd: ChangeDetectorRef,private router: Router, private toastr:ToastrService) {
     this.users.getAllUsers().subscribe( {
       next: (res) => {
         if (res) {
@@ -52,16 +53,23 @@ export class UsersTable {
     this.allUsers[updatedUserIndex] = userData;
     this.closeModalHandler();
   }
-  deleteUser(id: string): void {
-    try {
-      this.users.deleteUser(id).subscribe((data) => {
-        this.allUsers = this.allUsers.filter((user) => user._id !== id);
-        console.log('User deleted successfully:', data);
-      });
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  }
+  // deleteUser(id: string): void {
+  //   try {
+  //     this.users.deleteUser(id).subscribe({
+  //       next: ()=> {
+  //         this.allUsers = this.allUsers.filter((user) => user._id !== id);
+  //         console.log('User deleted successfully:', data);
+  //         this.toastr.success("User deleted and table updated!");
+  //       },
+  //       error: (error)=>{
+  //         this.toastr.error("Error deleting user");
+  //         console.error('Error deleting user:', error);
+  //       }
+  //     });
+  //   } catch (error) {
+  //     console.error('Error deleting user:', error);
+  //   }
+  // }
   selectedUser: iUser | null = null;
   updateUser(id: string): void {
     const userToEdit = this.allUsers.find((u) => u._id === id);
@@ -86,10 +94,14 @@ export class UsersTable {
         this.allUsers = this.allUsers.filter(
           (user) => user._id !== this.userIdToDelete
         );
+        this.toastr.success("User deleted and table updated!");
         console.log('User deleted and table updated!');
         this.cancelDelete();
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        this.toastr.error("Error deleting user");
+        console.error(err)
+      },
     });
   }
 }

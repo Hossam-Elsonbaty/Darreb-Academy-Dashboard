@@ -125,6 +125,7 @@ import { CategoriesService } from '../../services/categories/categories.service'
 import { ICategory } from '../../models/i-category';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-course-page',
@@ -146,7 +147,8 @@ export class CreateCoursePage implements OnInit {
     private categoriesService: CategoriesService,
     private cd: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr :ToastrService
   ) {
     this.courseProp = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
@@ -237,20 +239,28 @@ export class CreateCoursePage implements OnInit {
       // If updating, use the updateCourse service
       this.addCourseService.updateCourse(this.courseId, formData).subscribe({
         next: (data) => {
+          this.toastr.success("Course updated successfully!");
           alert('Course updated successfully!');
           this.router.navigate(['/home/courses']);
           console.log(data);
         },
-        error: (err) => console.error(err),
+        error: (err) => {
+          this.toastr.error("Error Updating Course");
+          console.error(err)
+        }
       });
     } else {
       // If adding a new course, use the addCourse service
       this.addCourseService.addCourse(formData).subscribe({
         next: (data) => {
+          this.toastr.success("Course added successfully!");
           alert('Course added successfully!');
           this.router.navigate(['/home/courses']);
         },
-        error: (err) => console.error(err),
+        error: (err) => {
+          this.toastr.error("Error adding course");
+          console.error(err);
+        }
       });
     }
   }

@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CoursesService } from '../../services/courses/courses.service';
 import { AddChapterModalComponent } from "../add-chapter-modal-component/add-chapter-modal-component";
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class CourseChapters {
   constructor(
     private route: ActivatedRoute,
     private coursesService: CoursesService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toastr : ToastrService
   ) {}
 
   ngOnInit() {
@@ -116,12 +118,15 @@ export class CourseChapters {
     if (this.chapterIdToDelete) {
      this.coursesService.deleteChapter( this.chapterIdToDelete).subscribe({
         next: () => {
-         this.chapters = this.chapters.filter(ch => ch._id !== this.chapterIdToDelete);
-
+          this.chapters = this.chapters.filter(ch => ch._id !== this.chapterIdToDelete);
+          this.toastr.success("chapter deleted and table updated");
           console.log('chapter deleted and table updated!');
           this.cancelDelete();
         },
-        error: (err) => console.error(err),
+        error: (err) => {
+          this.toastr.error("Error deleting chapter");
+          console.error(err)
+        }
       });
     }
   }

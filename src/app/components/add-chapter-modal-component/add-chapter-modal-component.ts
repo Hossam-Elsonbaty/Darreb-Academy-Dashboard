@@ -3,6 +3,7 @@ import { IChapter, ICourse } from '../../models/i-course';
 import { CoursesService } from '../../services/courses/courses.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-chapter-modal-component',
@@ -34,18 +35,20 @@ export class AddChapterModalComponent implements OnChanges {
     console.log(this.chapterToEdit);
 
   }
-  constructor(private courseService: CoursesService) {}
+  constructor(private courseService: CoursesService,private toastr:ToastrService) {}
   handleChapterSubmit() {
      if (this.chapterToEdit && this.chapterToEdit._id) {
       this.courseService
         .updateChapter( this.chapterToEdit._id, this.chapterProp)
         .subscribe({
           next: (res) => {
+            this.toastr.success("Chapter updated successfully");
             console.log('Chapter updated:', res);
             this.chapterUpdated.emit(res);
             this.closeModal.emit();
           },
           error: (error) => {
+            this.toastr.error("Error updating chapter");
             console.error('Error updating chapter:', error);
           },
         });
@@ -54,10 +57,12 @@ export class AddChapterModalComponent implements OnChanges {
       .subscribe({
         next: (res) => {
           console.log('Chapter added:', res);
+          this.toastr.error("Chapter added successfully");
           this.refreshList.emit(res);
           this.closeModal.emit();
         },
         error: (error) => {
+          this.toastr.error("Error adding chapter");
           console.error('Error adding chapter:', error);
         },
       });}

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ICategory } from '../../models/i-category';
 import { CategoriesService } from '../../services/categories/categories.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-category',
   imports: [FormsModule, CommonModule],
@@ -28,25 +29,34 @@ export class AddCategory {
       }
     }
   categoryProp: ICategory = {} as ICategory;
-  constructor(private categoryService: CategoriesService) {}
+  constructor(private categoryService: CategoriesService, private toastr:ToastrService) {}
     handleSubmit() {
       if (this.categoryToEdit && this.categoryToEdit._id) {
         this.categoryService.updateCategory(this.categoryToEdit._id, this.categoryProp).subscribe({
           next: (res) => {
-            console.log('Course updated successfully:', res);
+            console.log('category updated successfully:', res);
+            this.toastr.success("category updated successfully");
             this.categoryUpdated.emit(res.data);
             this.closeModal.emit();
           },
           error: (error) => {
             console.error('Error updating user:', error);
+            this.toastr.error("Error updating category");
           },
         });
       } else {
-        this.categoryService.addNewCategory(this.categoryProp).subscribe((res) => {
-        console.log('category added successfully:', res);
-        this.categoryAdded.emit(res.data);
-        this.refreshList.emit(res.data);
-        this.closeModal.emit();
+        this.categoryService.addNewCategory(this.categoryProp).subscribe({
+          next: (res) => {
+            console.log('category added successfully:', res);
+            this.toastr.success("category added successfully");
+            this.categoryAdded.emit(res.data);
+            this.refreshList.emit(res.data);
+            this.closeModal.emit();
+          },
+          error: (error) => {
+            console.error('Error adding category:', error);
+            this.toastr.error("Error adding category");
+          },
     });
       }
     }

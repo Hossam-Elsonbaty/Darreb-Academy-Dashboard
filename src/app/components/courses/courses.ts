@@ -3,10 +3,12 @@ import { ICourse } from '../../models/i-course';
 import { CoursesService } from '../../services/courses/courses.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Loader } from "../loader/loader";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-courses',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, Loader],
   templateUrl: './courses.html',
   styleUrls: ['./courses.css'],
 })
@@ -14,7 +16,7 @@ export class Courses {
   isDeleteModalOpen: boolean = false;
   courseIdToDelete: string | null = null;
   allCourses !:ICourse[];
-  constructor(@Inject(CoursesService) private courses: CoursesService, private cd: ChangeDetectorRef){
+  constructor(@Inject(CoursesService) private courses: CoursesService, private cd: ChangeDetectorRef, private toastr:ToastrService){
     this.courses.getAllCourses().subscribe((data)=>{
       this.allCourses = data
       console.log(data);
@@ -49,10 +51,14 @@ export class Courses {
         this.allCourses = this.allCourses.filter(
           (course) => course._id !== this.courseIdToDelete
         );
-        console.log('User deleted and table updated!');
+        this.toastr.success("Course deleted and table updated");
+        console.log('Course deleted and table updated!');
         this.cancelDelete();
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        this.toastr.error("Error deleting course");
+        console.error(err)
+      }
     });
   }
 }

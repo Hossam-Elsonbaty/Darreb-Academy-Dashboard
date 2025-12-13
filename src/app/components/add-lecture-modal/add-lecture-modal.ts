@@ -137,7 +137,7 @@ export class AddLectureModal implements OnChanges {
     } else {
       this.courseService.addLecture( formData).subscribe({
         next: (res) => {
-          this.toastr.success("Lecture added successfully")
+          this.toastr.success("Lecture added successfully");
           console.log('Lecture added:', res);
           this.refreshList.emit(res);
           this.closeModal.emit();

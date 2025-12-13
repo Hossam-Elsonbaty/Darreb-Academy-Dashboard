@@ -3,6 +3,7 @@ import { ICategory } from '../../models/i-category';
 import { CategoriesService } from '../../services/categories/categories.service';
 import { AddCategory } from '../add-category/add-category';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-categories',
@@ -15,7 +16,7 @@ export class Categories {
   isDeleteModalOpen: boolean = false;
   categoryIdToDelete: string | null = null;
 
-  constructor(private Categories: CategoriesService, private cd: ChangeDetectorRef) {
+  constructor(private Categories: CategoriesService, private cd: ChangeDetectorRef, private toastr:ToastrService) {
     this.Categories.getAllCategories().subscribe({
       next: (data) => {
         this.allCategories = data;
@@ -76,10 +77,14 @@ export class Categories {
           this.allCategories = this.allCategories.filter(
             (cat) => cat._id !== this.categoryIdToDelete
           );
+          this.toastr.success("category deleted and table updated");
           console.log('category deleted and table updated!');
           this.cancelDelete();
         },
-        error: (err) => console.error(err),
+        error: (err) => {
+          this.toastr.error("Error deleting category");
+          console.error(err)
+        },
       });
     }
   }

@@ -6,10 +6,11 @@ import { AddChapterModalComponent } from "../add-chapter-modal-component/add-cha
 import { CommonModule } from '@angular/common';
 import { AddLectureModal } from "../add-lecture-modal/add-lecture-modal";
 import { ToastrService } from 'ngx-toastr';
+import { Loader } from "../loader/loader";
 
 @Component({
   selector: 'app-chapter-lectures',
-  imports: [CommonModule, RouterLink, AddLectureModal],
+  imports: [CommonModule, RouterLink, AddLectureModal, Loader],
   templateUrl: './chapter-lectures.html',
   styleUrl: './chapter-lectures.css',
 })
