@@ -13,12 +13,12 @@ export class Inbox {
   isDeleteModalOpen: boolean = false;
   inboxIdToDelete: string | null = null;
   isMsgModalOpen: boolean = false;
-selectedInboxForMsg: IInbox | null = null;
+  selectedInboxForMsg: IInbox | null = null;
   replyMessage: string = '';
   constructor(private Inboxes: InboxService, private cd: ChangeDetectorRef) {
     this.Inboxes.getAllInboxes().subscribe({
       next: (data) => {
-        console.log("Inbox data from API:", data);
+        console.log('Inbox data from API:', data);
         this.allInboxes = data;
         this.cd.detectChanges();
       },
@@ -27,43 +27,43 @@ selectedInboxForMsg: IInbox | null = null;
       },
     });
   }
-openDeleteModal(id: string) {
-   console.log("Open delete modal for ID:", id);
-  this.inboxIdToDelete = id;
-  this.isDeleteModalOpen = true;
-}
+  openDeleteModal(id: string) {
+    console.log('Open delete modal for ID:', id);
+    this.inboxIdToDelete = id;
+    this.isDeleteModalOpen = true;
+  }
 
   cancelDelete() {
     this.inboxIdToDelete = null;
     this.isDeleteModalOpen = false;
     this.cd.detectChanges();
   }
-confirmDeleteYes() {
-    console.log("Confirm delete clicked, ID:", this.inboxIdToDelete);
-  if (!this.inboxIdToDelete) return;
+  confirmDeleteYes() {
+    console.log('Confirm delete clicked, ID:', this.inboxIdToDelete);
+    if (!this.inboxIdToDelete) return;
 
-  const idToDelete = this.inboxIdToDelete;
+    const idToDelete = this.inboxIdToDelete;
 
-  this.Inboxes.deleteInbox(idToDelete).subscribe({
-    next: () => {
-      console.log("Deleted from backend:", idToDelete);
-      this.allInboxes = this.allInboxes.filter(inbox => inbox.id !== idToDelete);
-      this.cancelDelete();
-    },
-    error: (err) => console.error("Delete error:", err)
-  });
-}
-openMsgModal(inbox: IInbox) {
-  this.selectedInboxForMsg = inbox;
-  this.isMsgModalOpen = true;
-  this.replyMessage = '';
-}
-closeCommentModal() {
-  this.selectedInboxForMsg = null;
-  this.isMsgModalOpen = false;
-}
+    this.Inboxes.deleteInbox(idToDelete).subscribe({
+      next: () => {
+        console.log('Deleted from backend:', idToDelete);
+        this.allInboxes = this.allInboxes.filter((inbox) => inbox.id !== idToDelete);
+        this.cancelDelete();
+      },
+      error: (err) => console.error('Delete error:', err),
+    });
+  }
+  openMsgModal(inbox: IInbox) {
+    this.selectedInboxForMsg = inbox;
+    this.isMsgModalOpen = true;
+    this.replyMessage = '';
+  }
+  closeCommentModal() {
+    this.selectedInboxForMsg = null;
+    this.isMsgModalOpen = false;
+  }
   sendReply(msg: string) {
-     console.log("Msg sent:", msg, "to inbox:", this.selectedInboxForMsg);
+    console.log('Msg sent:', msg, 'to inbox:', this.selectedInboxForMsg);
     this.closeCommentModal();
-}
+  }
 }

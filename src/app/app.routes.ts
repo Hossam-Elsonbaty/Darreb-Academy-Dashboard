@@ -30,7 +30,7 @@ export const routes: Routes = [
       { path: 'update-course/:id', component: CreateCoursePage, title: 'Update course' },
       { path: 'update-course', component: UpdateCoursePage, title: 'Update course' },
       { path: 'categories', component: Categories, title: 'categories' },
-      { path: 'inbox', component: Inbox, title: 'inbox' },
+      { path: 'inbox', component: Inbox, title: 'Inbox' },
     ],
   },
   { path: 'home/users', component: UsersTable, title: 'home/users' },
