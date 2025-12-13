@@ -22,11 +22,4 @@ export class InboxService {
   deleteInbox(id: string): Observable<IInbox> {
     return this.http.delete<IInbox>(`${environment.apiUrl}/inboxes/${id}`, this.httpHeaders);
   }
-  SendMsg(inboxObj: IInbox): Observable<IInbox> {
-    return this.http.post<IInbox>(
-      `${environment.apiUrl}/inboxes`,
-      inboxObj,
-      this.httpHeaders
-    );
-  }
 }
