@@ -57,7 +57,7 @@ export class AddChapterModalComponent implements OnChanges {
       .subscribe({
         next: (res) => {
           console.log('Chapter added:', res);
-          this.toastr.error("Chapter added successfully");
+          this.toastr.success("Chapter added successfully");
           this.refreshList.emit(res);
           this.closeModal.emit();
         },

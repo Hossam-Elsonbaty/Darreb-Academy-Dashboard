@@ -110,11 +110,13 @@ export class AddLectureModal implements OnChanges {
   }
 
   handleLectureSubmit() {
+    console.log(this.chapterId);
+
     // Create FormData to handle both text and file data
     const formData = new FormData();
     formData.append('title', this.lectureProp.title);
     formData.append('title_ar', this.lectureProp.title_ar);
-    formData.append('courseId', this.chapterId);
+    formData.append('chapterId', this.chapterId);
 
     if (this.selectedVideo) {
       formData.append('video', this.selectedVideo);

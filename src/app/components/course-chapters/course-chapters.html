@@ -13,11 +13,12 @@
   <div
     class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default"
   >
-    <table class="w-full text-sm text-left rtl:text-right text-body">
+    <table class="w-full text-sm text-center rtl:text-right text-body">
       <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
         <tr>
           <th scope="col" class="px-6 py-3 font-medium">Title</th>
           <th scope="col" class="px-6 py-3 font-medium">Title_ar</th>
+          <th scope="col" class="px-6 py-3 font-medium">Lectures Count</th>
           <th scope="col" class="px-6 py-3 font-medium">Duration</th>
           <th scope="col" class="px-6 py-3 font-medium">Options</th>
         </tr>
@@ -25,17 +26,20 @@
       <tbody>
         @for (chapter of chapters; track chapter._id) {
         <tr>
-          <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+          <td class="px-6 py-4 font-medium text-heading whitespace-nowrap ">
             {{ chapter.title }}
           </td>
           <td class="px-6 py-4">
             {{ chapter.title_ar }}
           </td>
           <td class="px-6 py-4">
-            {{ chapter.duration }}
+            {{ chapter.lectures?.length }}
           </td>
           <td class="px-6 py-4">
-            <div class="flex items-center gap-4">
+            {{ chapter.totalDuration }}
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-4 justify-center">
               <a class="cursor-pointer" [routerLink]="['/home/chapter-lectures', chapter._id]">
                 <span class="pi pi-eye text-lg text-blue-500"></span>
               </a>

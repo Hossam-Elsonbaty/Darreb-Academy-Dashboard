@@ -9,12 +9,17 @@ export interface ILecture {
   duration: number;
   order: number;
 }
-
+export interface ICourseChaptersResponse {
+  courseId: string;
+  totalChapters: number;
+  data: IChapter[];
+}
 export interface IChapter {
   _id: string;
   title: string;
   title_ar: string;
-  duration: number;
+  totalDuration: string;
+  totalLectures: number;
   order: number;
   lectures?: ILecture[];
 }
@@ -35,7 +40,10 @@ export interface ICourse {
   instructor?: IInstructor;
   category: ICategory;
   level: string;
-  duration: number;
+  totalDuration: string;
   isPublished: boolean;
   chapters?: IChapter[];
+  totalRatings:number;
+  totalEnrollments:number;
+  totalLectures:number;
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICategory } from '../../models/i-category';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.development';
 import { ApiResponse } from '../../models/i-ApiResponse';
 
 @Injectable({
@@ -18,12 +18,12 @@ export class CategoriesService {
     };
   }
   getAllCategories(): Observable<ICategory[]> {
-    return this.http.get<ICategory[]>(`${environment.endPointUrl}/categories`, this.httpHeaders);
+    return this.http.get<ICategory[]>(`${environment.endPointTestUrl}/api/categories`, this.httpHeaders);
   }
   addNewCategory(categoryObj: ICategory): Observable<ApiResponse<ICategory>> {
     {
       return this.http.post<ApiResponse<ICategory>>(
-        `${environment.endPointUrl}/categories`,
+        `${environment.endPointTestUrl}/api/categories`,
         categoryObj,
         this.httpHeaders
       );
@@ -31,12 +31,12 @@ export class CategoriesService {
   }
   updateCategory(id: string, categoryObj: ICategory): Observable<ApiResponse<ICategory>> {
     return this.http.put<ApiResponse<ICategory>>(
-      `${environment.endPointUrl}/categories/${id}`,
+      `${environment.endPointTestUrl}/api/categories/${id}`,
       categoryObj,
       this.httpHeaders
     );
   }
   deleteCategory(id: string): Observable<ICategory> {
-    return this.http.delete<ICategory>(`${environment.endPointUrl}/categories/${id}`, this.httpHeaders);
+    return this.http.delete<ICategory>(`${environment.endPointTestUrl}/api/categories/${id}`, this.httpHeaders);
   }
 }

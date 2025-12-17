@@ -36,24 +36,23 @@ export class ChapterLectures {
   ) {}
 
   ngOnInit() {
-
     this.chapterId = this.route.snapshot.paramMap.get('id') ?? '';
-
+    console.log(this.chapterId);
     if (!this.chapterId) {
       console.error('NO COURSE ID FOUND IN URL');
       return;
     }
-
     this.loadLectures();
   }
 
   loadLectures() {
+  console.log("chapterId:", this.chapterId);
     this.coursesService.getAllLectures(this.chapterId).subscribe({
       next: (res) => {
         console.log(res);
         this.lectures = res;
         // this.lectures = res.lectures;
-        console.log("Loaded chapters:", this.lectures);
+        console.log("Loaded lectures:", this.lectures);
         this.isLoading = false;
         this.cd.detectChanges();
       },

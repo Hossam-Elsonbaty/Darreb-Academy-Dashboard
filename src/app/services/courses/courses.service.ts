@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IChapter, ICourse, ILecture } from '../../models/i-course';
+import { IChapter, ICourse, ICourseChaptersResponse, ILecture } from '../../models/i-course';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { ApiResponse } from '../../models/i-ApiResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,9 @@ export class CoursesService {
     return this.http.put<ICourse>(`${environment.endPointTestUrl}/api/courses/${courseId}`, data);
   }
   //// Chapter req
+  getCourseChapters(courseId:string): Observable<ICourseChaptersResponse> {
+    return this.http.get<ICourseChaptersResponse>(`${environment.endPointTestUrl}/api/chapters/${courseId}/chapters`, this.httpHeaders);
+  }
   addChapter(courseId: string, chapterData: IChapter): Observable<IChapter> {
     return this.http.post<IChapter>(
       `${environment.endPointTestUrl}/api/chapters/create-chapter`,

@@ -10,7 +10,7 @@
         </button>
     </div>
     <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-        <table class="w-full text-sm text-left rtl:text-right text-body">
+        <table class="w-full text-sm text-center rtl:text-right text-body">
             <thead class="bg-neutral-secondary-soft border-b border-default">
                 <tr>
                     <th class="px-6 py-3 font-medium">name</th>
@@ -31,7 +31,7 @@
                        {{ category.name_ar }}
                     </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-4 justify-center">
                             <button class="cursor-pointer" (click)="updateCategory(category._id)"><span class="pi pi-pencil text-lg text-green-500"></span></button>
                             <button class="cursor-pointer" (click)="openDeleteModal(category._id)"><span class="pi pi-trash text-lg text-red-500"></span></button>
                         </div>

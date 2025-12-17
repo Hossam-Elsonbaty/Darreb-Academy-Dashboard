@@ -46,12 +46,11 @@ export class CourseChapters {
   }
 
   loadCourse() {
-    this.coursesService.getCourseById(this.courseId).subscribe({
+    this.coursesService.getCourseChapters(this.courseId).subscribe({
       next: (res) => {
-        this.course = res;
-        this.chapters = res.chapters?.map((c: any) => c.chapter) ?? [];
+        this.chapters = res.data ?? [];
 
-        console.log("Loaded chapters:", this.chapters);
+        console.log("Loaded chapters:", res.data);
 
         this.isLoading = false;
         this.cd.detectChanges();
