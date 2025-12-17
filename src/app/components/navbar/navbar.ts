@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { iUser } from '../../models/iUsers';
 
@@ -10,12 +10,13 @@ import { iUser } from '../../models/iUsers';
 })
 export class Navbar {
   userData: iUser | null = null;
-  constructor(private router:Router) {}
+  constructor(private router:Router, private cd: ChangeDetectorRef) {}
   ngOnInit(): void {
     const userJson = localStorage.getItem('user');
     if (userJson) {
       try {
         this.userData = JSON.parse(userJson) as iUser;
+        this.cd.detectChanges();
       } catch (error) {
         console.error('Failed to parse user from localStorage', error);
         this.userData = null;
