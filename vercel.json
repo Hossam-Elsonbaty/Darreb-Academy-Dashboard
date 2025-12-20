@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/darreb-academy-dashboard/browser",
+  "outputDirectory": "dist/darreb-academy/browser",
   "rewrites": [
     {
       "source": "/(.*)",
