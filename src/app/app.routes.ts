@@ -33,7 +33,6 @@ export const routes: Routes = [
       { path: 'inbox', component: Inbox, title: 'Inbox' },
     ],
   },
-  { path: 'home/users', component: UsersTable, title: 'home/users' },
   { path: 'login', component: Login, title: 'login' },
   { path: 'register', component: SignUp, title: 'register' },
   { path: '**', component: PageNotFound, title: 'Page not found' },
