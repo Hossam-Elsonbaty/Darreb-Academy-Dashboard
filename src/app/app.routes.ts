@@ -14,7 +14,7 @@ import { ChapterLectures } from './components/chapter-lectures/chapter-lectures'
 import { Inbox } from './components/inbox/inbox';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home/dashboard', pathMatch: 'full' },
   {
     path: 'home',
     component: Home,
