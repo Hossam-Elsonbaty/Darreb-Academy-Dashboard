@@ -16,7 +16,7 @@ import { Inbox } from './components/inbox/inbox';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: '',
+    path: 'home',
     component: Home,
     title: 'Home',
     children: [
