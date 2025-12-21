@@ -14,6 +14,6 @@ export class AnalyticsService {
     }
   }
   getDashboardAnalytics(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/api/analytics`,this.httpHeaders);
+    return this.http.get<any>(`${environment.endPointUrl}/analytics`,this.httpHeaders);
   }
 }

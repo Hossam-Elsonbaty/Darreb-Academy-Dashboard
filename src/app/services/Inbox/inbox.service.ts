@@ -17,9 +17,9 @@ export class InboxService {
     };
   }
   getAllInboxes(): Observable<IInbox[]> {
-    return this.http.get<IInbox[]>(`${environment.apiUrl}/api/contact-us`, this.httpHeaders);
+    return this.http.get<IInbox[]>(`${environment.endPointUrl}/contact-us`, this.httpHeaders);
   }
   deleteInbox(id: string): Observable<IInbox> {
-    return this.http.delete<IInbox>(`${environment.apiUrl}/api/contact-us/${id}`, this.httpHeaders);
+    return this.http.delete<IInbox>(`${environment.endPointUrl}/contact-us/${id}`, this.httpHeaders);
   }
 }
