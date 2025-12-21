@@ -1,29 +1,24 @@
-
+<!--
 <div class="p-6 space-y-6">
-  <!-- TOP CARDS -->
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-    <!-- Users -->
     <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
       <p class="text-gray-600">Total Users</p>
       <h2 class="text-2xl font-bold text-blue-500">
         {{ analytics?.totalUsers }}
       </h2>
     </div>
-    <!-- Purchased Courses -->
     <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
       <p class="text-gray-600">Purchased Courses</p>
       <h2 class="text-2xl font-bold text-green-500">
-        {{ analytics?.totalPurchasedCourses }}
+        {{ analytics?.purchasedCourses}}
       </h2>
     </div>
-    <!-- Income -->
     <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
       <p class="text-gray-600">Total Income</p>
       <h2 class="text-2xl font-bold text-indigo-500">
         ${{ analytics?.totalIncome }}
       </h2>
     </div>
-    <!-- Total Courses -->
     <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
       <p class="text-gray-600">Total Courses</p>
       <h2 class="text-2xl font-bold text-orange-500">
@@ -32,9 +27,7 @@
     </div>
   </div>
 
-  <!-- CHARTS -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <!-- Purchases Line Chart -->
     <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
       <h3 class="font-semibold mb-4">Purchases Overview</h3>
       @if (!analytics || analytics.purchasesByMonth.length === 0) {
@@ -46,7 +39,6 @@
       }
     </div>
 
-    <!-- Donut Chart -->
     <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
       <h3 class="font-semibold mb-4">Purchases by Category</h3>
       @if (!analytics || analytics.purchasesByCategory.length === 0) {
@@ -59,7 +51,6 @@
     </div>
   </div>
 
-  <!-- Recent Purchases -->
   <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
     <h3 class="font-semibold mb-4">Recent Purchases</h3>
     <div class="overflow-x-auto">
@@ -74,17 +65,137 @@
         </thead>
         <tbody>
           @if (analytics?.recentPurchases) {
-            @for (item of analytics.recentPurchases; track item.id) {
+            @for (item of analytics.recentPurchases; track item._id) {
               <tr class=" hover:bg-gray-50">
-                <td class="py-3">{{ item.user }}</td>
-                <td class="py-3">{{ item.course }}</td>
-                <td class="py-3 font-semibold text-green-600">${{ item.price }}</td>
-                <td class="py-3">{{ item.date }}</td>
+                <td class="py-3">{{ item.userDetails.fullName }}</td>
+                <td class="py-3">{{ item.items.course }}</td>
+                <td class="py-3 font-semibold text-green-600">${{ item.items.price }}</td>
+                <td class="py-3">{{ item.createdAt }}</td>
               </tr>
             }
           } @else {
             <tr>
               <td colspan="4" class="py-3 text-gray-400 text-center">No recent purchases</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="p-6 space-y-6">
+  <!-- TOP CARDS -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <!-- Users -->
+    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+      <p class="text-gray-600 text-sm">Total Users</p>
+      <h2 class="text-3xl font-bold text-blue-500 mt-2">
+        {{ analytics?.totalUsers || 0 }}
+      </h2>
+    </div>
+
+    <!-- Purchased Courses -->
+    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+      <p class="text-gray-600 text-sm">Purchased Courses</p>
+      <h2 class="text-3xl font-bold text-green-500 mt-2">
+        {{ analytics?.purchasedCourses || 0 }}
+      </h2>
+    </div>
+
+    <!-- Income -->
+    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+      <p class="text-gray-600 text-sm">Total Income</p>
+      <h2 class="text-3xl font-bold text-indigo-500 mt-2">
+        ${{ analytics?.totalIncome || 0 }}
+      </h2>
+    </div>
+
+    <!-- Total Courses -->
+    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+      <p class="text-gray-600 text-sm">Total Courses</p>
+      <h2 class="text-3xl font-bold text-orange-500 mt-2">
+        {{ analytics?.totalCourses || 0 }}
+      </h2>
+    </div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Purchases Line Chart -->
+    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+      <h3 class="font-semibold text-lg mb-4">Purchases Overview</h3>
+      @if (!analytics || analytics.purchasesOverview.length === 0) {
+        <div class="flex items-center justify-center h-64">
+          <p class="text-gray-400 text-sm">No purchase data available</p>
+        </div>
+      } @else {
+        <div style="height: 280px;">
+          <canvas id="purchasesChart"></canvas>
+        </div>
+      }
+    </div>
+
+    <!-- Donut Chart -->
+    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+      <h3 class="font-semibold text-lg mb-4">Purchases by Category</h3>
+      @if (!analytics || analytics.purchasesByCategory.length === 0) {
+        <div class="flex items-center justify-center h-64">
+          <p class="text-gray-400 text-sm">No category data available</p>
+        </div>
+      } @else {
+        <div style="height: 280px;">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Recent Purchases -->
+  <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+    <h3 class="font-semibold text-lg mb-4">Recent Purchases</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="text-left text-gray-600 border-b border-gray-200">
+            <th class="pb-3 px-4">User</th>
+            <th class="pb-3 px-4">Email</th>
+            <th class="pb-3 px-4">Course Name</th>
+            <th class="pb-3 px-4">Price</th>
+            <th class="pb-3 px-4">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (analytics?.recentPurchases && analytics.recentPurchases.length > 0) {
+            @for (item of analytics.recentPurchases; track item._id) {
+              <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                  <div class="font-medium text-gray-900">{{ item.userDetails.fullName }}</div>
+                </td>
+                <td class="py-4 px-4 text-gray-600 text-sm">{{ item.userDetails.email }}</td>
+                <td class="py-4 px-4 text-gray-500 text-sm font-mono">
+                  {{ item.items.courseTitle}}
+                  <!-- {{ item.items.course.substring(0, 8) }}... -->
+                </td>
+                <td class="py-4 px-4">
+                  <span class="font-semibold text-green-600">${{ item.items.price }}</span>
+                </td>
+                <td class="py-4 px-4 text-gray-600 text-sm">
+                  {{ formatDate(item.createdAt) }}
+                </td>
+              </tr>
+            }
+          } @else {
+            <tr>
+              <td colspan="5" class="py-8 text-gray-400 text-center">
+                <div class="flex flex-col items-center">
+                  <svg class="w-12 h-12 mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                  <p>No recent purchases</p>
+                </div>
+              </td>
             </tr>
           }
         </tbody>

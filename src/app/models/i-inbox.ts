@@ -1,6 +1,6 @@
 export interface IInbox {
   id:string
-  fullName:string
+  name:string
   email:string
   msg:string
 }
