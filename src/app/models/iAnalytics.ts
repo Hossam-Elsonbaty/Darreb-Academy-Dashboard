@@ -1,35 +1,3 @@
-// export interface IAnalytics {
-//   totalUsers: number;
-//   totalIncome: number;
-//   totalCourses: number;
-//   purchasedCourses: number;
-//   purchasesByMonth: PurchasesOverviewItem[];
-//   purchasesByCategory: IPurchasesByCategory[];
-//   recentPurchases: IRecentPurchase[];
-// }
-
-// export interface PurchasesOverviewItem {
-//   _id: number; // month number (1–12)
-//   totalPurchases: number;
-// }
-
-// export interface IPurchasesByCategory {
-//   _id: string; // categoryId
-//   totalPurchases: number;}
-
-// export interface IRecentPurchase {
-//   _id: string;
-//   items: {
-//     course: string; // courseId
-//     price: number;
-//   };
-//   createdAt: string; // ISO date string
-//   userDetails: UserDetails;
-// }
-// export interface UserDetails {
-//   email: string;
-//   fullName: string;
-// }
 export interface IAnalytics {
   totalUsers: number;
   totalIncome: number;
