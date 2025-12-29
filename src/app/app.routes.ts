@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { SignUp } from './components/sign-up/sign-up';
+// import { SignUp } from './components/sign-up/sign-up';
 import { Login } from './components/login/login';
 import { PageNotFound } from './components/page-not-found/page-not-found';
 import { Home } from './components/home/home';
@@ -34,6 +34,6 @@ export const routes: Routes = [
     ],
   },
   { path: 'login', component: Login, title: 'login' },
-  { path: 'register', component: SignUp, title: 'register' },
+  // { path: 'register', component: SignUp, title: 'register' },
   { path: '**', component: PageNotFound, title: 'Page not found' },
 ];

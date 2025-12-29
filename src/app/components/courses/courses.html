@@ -1,13 +1,77 @@
 <div class="flex flex-col gap-5">
     <div class="border-l-4 border-green-400 pl-5 flex justify-between items-center">
         <h1 class="font-bold text-2xl w-fit">Cousres Table</h1>
-        <a routerLink="/home/create-course"
-            class="w-max p-2 flex items-center gap-3 px-4 text-lg rounded-lg bg-green-500 text-white cursor-pointer">
-            <span class="pi pi-plus text-lg"></span>
-            Add New course
-        </a>
+        @if(isInstructor){
+          <a routerLink="/home/create-course"
+              class="w-max p-2 flex items-center gap-3 px-4 text-lg rounded-lg bg-green-500 text-white cursor-pointer">
+              <span class="pi pi-plus text-lg"></span>
+              Add New course
+          </a>
+        }
     </div>
-    <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+    <div class="card">
+    <p-table
+        [value]="allCourses"
+        [paginator]="true"
+        [rows]="5"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]"
+    >
+        <ng-template #header>
+            <tr>
+                    <th class="px-6 py-3 font-medium">Thumbnail</th>
+                    <th class="px-6 py-3 font-medium">Title</th>
+                    <th class="px-6 py-3 font-medium">Title (AR)</th>
+                    <th class="px-6 py-3 font-medium">Price</th>
+                    <th class="px-6 py-3 font-medium">Category</th>
+                    <th class="px-6 py-3 font-medium">Level</th>
+                    <th class="px-6 py-3 font-medium">Duration</th>
+                    <th class="px-6 py-3 font-medium">isPublished</th>
+                    <th class="px-6 py-3 font-medium">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-course>
+                <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default">
+                    <td class="px-6 py-4">
+                        <img [src]="course.thumbnail" alt="thumbnail" class="w-16 h-16 rounded object-cover">
+                    </td>
+                    <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                        {{ course.title }}
+                    </td>
+
+                    <td class="px-6 py-4">
+                      {{ course.title_ar }}
+                    </td>
+
+
+                    <td class="px-6 py-4">
+                        {{ course.price}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ course.category.name || "All"}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ course.level}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ course.totalDuration}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ course.isPublished?"yes":"no"}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-4">
+                            <a [routerLink]="['/home/course-chapters', course._id]" class="cursor-pointer"><span class="pi pi-eye text-lg text-blue-500"></span></a>
+                            <a [routerLink]="['/home/update-course', course._id]" class="cursor-pointer"><span class="pi pi-pencil text-lg text-green-500"></span></a>
+                            <button class="cursor-pointer" (click)="openDeleteModal(course._id)"><span class="pi pi-trash text-lg text-red-500"></span></button>
+                        </div>
+                    </td>
+
+                </tr>
+        </ng-template>
+    </p-table>
+</div>
+    <!-- <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
       <table class="w-full text-sm text-center rtl:text-right text-body">
             <thead class="bg-neutral-secondary-soft border-b border-default">
                 <tr>
@@ -64,7 +128,7 @@
                 }
             </tbody>
         </table>
-    </div>
+    </div> -->
 </div>
 <!-- Delete Confirmation Modal -->
 <div

@@ -5,10 +5,10 @@ import { iUser } from '../../models/iUsers';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-users-table',
-  imports: [AddUserModalComponent, CommonModule],
+  imports: [AddUserModalComponent, CommonModule,TableModule],
   templateUrl: './users-table.html',
   styleUrl: './users-table.css',
 })

@@ -9,7 +9,44 @@
             Add New category
         </button>
     </div>
-    <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+    <div class="card">
+    <p-table
+        [value]="allCategories"
+        [paginator]="true"
+        [rows]="5"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]"
+    >
+        <ng-template #header>
+            <tr>
+                    <th class="px-6 py-3 font-medium">name</th>
+                    <th class="px-6 py-3 font-medium">name_ar</th>
+                    <th class="px-6 py-3 font-medium">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-category>
+                <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default">
+
+
+                    <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                        {{ category.name }}
+                    </td>
+
+                    <td class="px-6 py-4">
+                       {{ category.name_ar }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-4 justify-center">
+                            <button class="cursor-pointer" (click)="updateCategory(category._id)"><span class="pi pi-pencil text-lg text-green-500"></span></button>
+                            <button class="cursor-pointer" (click)="openDeleteModal(category._id)"><span class="pi pi-trash text-lg text-red-500"></span></button>
+                        </div>
+                    </td>
+
+                </tr>
+        </ng-template>
+    </p-table>
+</div>
+    <!-- <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
         <table class="w-full text-sm text-center rtl:text-right text-body">
             <thead class="bg-neutral-secondary-soft border-b border-default">
                 <tr>
@@ -41,7 +78,7 @@
                 }
             </tbody>
         </table>
-    </div>
+    </div> -->
 </div>
 <!-- Delete Confirmation Modal -->
 <div

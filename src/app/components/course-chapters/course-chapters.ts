@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './course-chapters.css',
 })
 export class CourseChapters {
+  isInstructor:boolean=false;
 
   isLoading: boolean = true;
   course: ICourse | null = null;
@@ -34,6 +35,7 @@ export class CourseChapters {
   ) {}
 
   ngOnInit() {
+    this.isInstructor = JSON.parse(localStorage.getItem("user")|| '{}').role === "instructor";
 
     this.courseId = this.route.snapshot.paramMap.get('id') ?? '';
 

@@ -5,14 +5,16 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Loader } from "../loader/loader";
 import { ToastrService } from 'ngx-toastr';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-courses',
-  imports: [RouterLink, CommonModule, Loader],
+  imports: [RouterLink, CommonModule, Loader,TableModule],
   templateUrl: './courses.html',
   styleUrls: ['./courses.css'],
 })
 export class Courses {
+  isInstructor:boolean=false;
   isDeleteModalOpen: boolean = false;
   courseIdToDelete: string | null = null;
   allCourses !:ICourse[];
@@ -22,6 +24,7 @@ export class Courses {
       console.log(data);
       this.cd.detectChanges()
     })
+    this.isInstructor = JSON.parse(localStorage.getItem("user")|| '{}').role === "instructor";
   }
   isModalOpen: boolean = false;
   openModal(): void {

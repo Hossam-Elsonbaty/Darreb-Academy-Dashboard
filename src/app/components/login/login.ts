@@ -39,9 +39,15 @@ export class Login {
         if (res.success) {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('user', JSON.stringify(res.data));
-          this.router.navigate(['/home/dashboard'], {
-            replaceUrl: true
-          });
+          if(res.data.role=="instructor"){
+            this.router.navigate(['/home/courses'], {
+              replaceUrl: true
+            });
+          }else{
+            this.router.navigate(['/home/dashboard'], {
+              replaceUrl: true
+            });
+          }
           console.log(res.data);
         }
       },

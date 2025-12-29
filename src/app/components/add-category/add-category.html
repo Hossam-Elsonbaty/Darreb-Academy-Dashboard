@@ -13,7 +13,7 @@
         <input
           [(ngModel)]="categoryProp.name"
           type="text"
-          minlength="5"
+          minlength="2"
           #name="ngModel"
           name="name"
           id="name"
@@ -28,7 +28,8 @@
         <div class="min-h-5 mt-1">
           @if(name.errors?.['required']){
           <p class="text-red-500 text-sm mt-1">Category Name is required</p>
-          }@else if (name.errors?.['minlength']) {
+          }
+          @else if (name.errors?.['minlength']) {
           <p class="text-red-500 text-sm mt-1">Category Name at least 5 chars</p>
           }
         </div>

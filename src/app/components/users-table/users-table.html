@@ -9,7 +9,43 @@
       Add New User
     </button>
   </div>
-  <div
+  <div class="card">
+    <p-table
+        [value]="allUsers"
+        [paginator]="true"
+        [rows]="5"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]"
+    >
+        <ng-template #header>
+            <tr>
+          <th scope="col" class="px-6 py-3 font-medium">Full Name</th>
+          <th scope="col" class="px-6 py-3 font-medium">Email</th>
+          <th scope="col" class="px-6 py-3 font-medium">Role</th>
+          <!-- <th scope="col" class="px-6 py-3 font-medium">Action</th> -->
+            </tr>
+        </ng-template>
+        <ng-template #body let-user>
+            <tr>
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                          <!-- <td class="px-6 py-4">
+            <div class="flex items-center gap-4 justify-center">
+              <button class="cursor-pointer" (click)="updateUser(user._id)">
+                <span class="pi pi-pencil text-lg text-green-500"></span>
+              </button>
+              <button class="cursor-pointer" (click)="openDeleteModal(user._id)">
+                <span class="pi pi-trash text-lg text-red-500"></span>
+              </button>
+            </div>
+          </td> -->
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+  <!-- <div
     class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default"
   >
     <table class="w-full text-sm text-center rtl:text-right text-body">
@@ -43,7 +79,7 @@
         }
       </tbody>
     </table>
-  </div>
+  </div> -->
 </div>
 <!-- Delete Confirmation Modal -->
 <div

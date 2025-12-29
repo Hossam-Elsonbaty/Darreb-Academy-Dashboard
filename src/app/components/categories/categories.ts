@@ -4,10 +4,10 @@ import { CategoriesService } from '../../services/categories/categories.service'
 import { AddCategory } from '../add-category/add-category';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-
+import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-categories',
-  imports: [AddCategory, CommonModule],
+  imports: [AddCategory, CommonModule,TableModule],
   templateUrl: './categories.html',
   styleUrl: './categories.css',
 })

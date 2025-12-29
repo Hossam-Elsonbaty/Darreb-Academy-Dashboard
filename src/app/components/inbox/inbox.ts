@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { IInbox } from '../../models/i-inbox';
 import { InboxService } from '../../services/Inbox/inbox.service';
-
+import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-inbox',
-  imports: [],
+  imports: [TableModule,CommonModule],
   templateUrl: './inbox.html',
   styleUrl: './inbox.css',
 })

@@ -16,6 +16,7 @@ import { Loader } from "../loader/loader";
 })
 
 export class ChapterLectures {
+  isInstructor:boolean=false;
 
   isLoading: boolean = true;
   // course: ICourse | null = null;
@@ -36,6 +37,8 @@ export class ChapterLectures {
   ) {}
 
   ngOnInit() {
+    this.isInstructor = JSON.parse(localStorage.getItem("user")|| '{}').role === "instructor";
+
     this.chapterId = this.route.snapshot.paramMap.get('id') ?? '';
     console.log(this.chapterId);
     if (!this.chapterId) {

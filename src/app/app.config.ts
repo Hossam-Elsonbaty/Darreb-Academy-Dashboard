@@ -6,7 +6,8 @@ import { authInterceptor } from './interceptors/auth-interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { loaderInterceptor } from './interceptors/loader-interceptor';
-
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeuix/themes/aura';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -22,5 +23,10 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
+     providePrimeNG({
+            theme: {
+                preset: Aura
+            }
+        })
   ]
 };
