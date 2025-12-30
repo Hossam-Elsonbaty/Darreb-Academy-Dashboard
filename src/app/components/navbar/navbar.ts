@@ -65,6 +65,9 @@ export class Navbar implements OnInit{
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userData');
+    this.router.navigate(['/login'], {
+     replaceUrl: true
+   });
     // Navigate to login or home
     // this.router.navigate(['/login']);
   }
