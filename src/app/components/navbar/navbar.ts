@@ -10,7 +10,7 @@ import { iUser } from '../../models/iUsers';
 })
 export class Navbar implements OnInit{
   // userData: iUser | null = null;
-  // constructor(private router:Router) {}
+  constructor(private router:Router) {}
   // ngOnInit(): void {
   //   const userJson = localStorage.getItem('user');
   //   if (userJson) {
