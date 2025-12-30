@@ -1,4 +1,4 @@
-<nav class=" sticky w-full z-20 top-0 border-b border-gray-200 px-20">
+<!-- <nav class=" sticky w-full z-20 top-0 border-b border-gray-200 px-20">
   <div class="flex items-center justify-between  p-4 md:gap-x-4">
     <a href="#" class="flex items-center space-x-3">
       <img src="Logo.png" class="h-7 rounded-lg" alt=" Logo" />
@@ -48,6 +48,83 @@
           </li>
           <li>
             <button (click)="logout()" class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900">Sign out</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav> -->
+<nav class="sticky w-full z-20 top-0 border-b border-gray-200 px-20">
+  <div class="flex items-center justify-between p-4 md:gap-x-4">
+    <a href="#" class="flex items-center space-x-3">
+      <img src="Logo.png" class="h-7 rounded-lg" alt=" Logo" />
+      <h1 class="text-2xl font-bold text-gray-900">Good morning, {{userData?.fullName}}</h1>
+    </a>
+
+    <div class="order-2 md:order-2 w-full md:w-64 mt-3 md:mt-0 ml-auto">
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <span class="pi pi-search text-gray-400"></span>
+        </div>
+        <input
+          type="text"
+          class="block w-full pl-9 pr-3 py-2.5 border-none focus:ring-[#fff] focus:border-[#fff] text-gray-900 text-sm rounded-lg placeholder-gray-400"
+          placeholder="Search"
+        />
+      </div>
+    </div>
+
+    <div class="order-3 flex items-center space-x-3 ml-3 relative">
+      <button
+        type="button"
+        id="user-menu-button"
+        (click)="toggleDropdown()"
+        class="flex text-sm bg-white w-10 h-10 justify-center items-center rounded-full focus:ring-4 focus:ring-gray-200"
+      >
+        <span class="sr-only">Open user menu</span>
+        <img
+          class="w-10 h-10 rounded-full"
+          [src]="userData?.profilePic || 'Logo.png'"
+          alt="user photo"
+        />
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div
+        id="user-dropdown"
+        [class.hidden]="!isDropdownOpen"
+        class="absolute right-0 top-full mt-2 z-50 bg-white border border-gray-200 rounded-lg shadow-lg w-44"
+      >
+        <div class="px-4 py-3 text-sm border-b border-gray-200">
+          <span class="block font-medium text-gray-900">{{userData?.fullName}}</span>
+          <span class="block text-gray-500 truncate">{{userData?.email}}</span>
+        </div>
+        <ul class="p-2 text-sm font-medium text-gray-700">
+          <li>
+            <a
+              routerLink="/home/dashboard"
+              (click)="closeDropdown()"
+              class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+            >
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/settings"
+              (click)="closeDropdown()"
+              class="block p-2 rounded hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+            >
+              Settings
+            </a>
+          </li>
+          <li>
+            <button
+              (click)="logout()"
+              class="w-full text-left p-2 rounded hover:bg-gray-100 hover:text-red-600 cursor-pointer"
+            >
+              Sign out
+            </button>
           </li>
         </ul>
       </div>
